@@ -1,0 +1,113 @@
+\documentclass[11pt]{article}
+\title{PHIL 322---Modal Logic \\Homework 1}
+\author{}
+%\date{}
+%Add your name and the date in the brackets above, and then remove the percentage 
+%sign from the beginning of the line. 
+%this just makes sure that all the standard math fonts/definitions/modes can be 
+%used.
+\usepackage{amsfonts, amsmath, amssymb, amsthm}
+%using fullpage does what you think it does, forces the full page to be used rather
+%than the LaTeX norm, which is a reasonably narrow column.
+\usepackage{fullpage}
+%these commands allow you to declare theorems/lemmas/corollaries/definitions. They 
+%will all be numbered sequentially. That is, your document will remember what the 
+%last theorem number used was, and, the next theorem you write will have the 
+%subsequent number. As it is set up here, theorems, lemmas, etc. all share the same 
+%numbering sequence. That means, if you have a theorem and then a corollary, the 
+%theorem will be numbered as 1 as the corollary as 2.
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+%To declare a theorem you can write:
+%
+%\begin{theorem}
+%There are infinitely many prime numbers.
+%\end{theorem}
+%
+%prime $p$. Then consider the number we get by taking 
+%
+%$$n=(2 \times 3 \times 5 \times 7 \times 11 \dots \times p) +1$$
+%
+%Clearly, $n$ cannot be prime, by our assumption. Therefore, it is composite. But 
+%the fundamental theorem of arithmetic tells us that every positive integer has a 
+(unique) prime factorization. This means that $n$ is evenly divided by some prime 
+number $q$. But notice that $q$ cannot be any of the primes between $2$ and $p$, 
+because these will all have a remainder of $1$. Therefore, $n$ must be a prime 
+factor greater than $p$. This is a contradiction.
+%
+%\end{proof}
+%Everything up to here was just setting things up. Everything that you will 
+%actually see occurs between the \begin{document} and \end{document} tags
+\begin{document}
+\maketitle
+%This gives your name, the date, and the rest of the information you might have 
+entered at the top of the file. 
+\noindent
+1. Call a binary relation $R$ on a set $S$ \emph{asymmetric} if for no $a,b \in S$ 
+both $\langle a, b \rangle \in R$ and $\langle b, a \rangle \in R$. Specify a 
+relation $R$ and a set $S$ such that $R$ is a relation on $S$ and $R$ is reflexive 
+and asymmetric. 
+\newpage
+\noindent
+2. Prove that the transitive closure, $R^+$ of a binary relation $R$ is actually 
+transitive. You can do this however you like. Here is one suggestion:
+\begin{enumerate}
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\item Prove that, where $X$ is a set and $R \subseteq X^2$ (i.e.,\ it is a binary 
+relation on $X$), then $\langle a,b \rangle \in R^n$ (as defined on page 191 of 
+your text) iff there is a path of length $n$ between $a$ and $b$ in the graph of 
+$R$. 
+\item Use this result to then argue that if $\langle a,b\rangle \in R^+$ and $\
+langle b,c\rangle \in R^+$, then $\langle a,c\rangle \in R^+$.
+\end{enumerate}
+\newpage
+\noindent
+3. Let $R \subseteq X^2$ be a binary relation on $X$ that is antisymmetric, 
+transitive and total/connex (notice that totality implies reflexivity). Show that 
+$$R' := \{\langle x,y \rangle \in X^2: \langle y, x \rangle \notin R\}$$
+\noindent
+is irreflexive, transitive, and connected/semi-connex. (A relation on $X$  is \
+emph{connected}, or \emph{semi-connex}, if, for all $x,y \in X$, if $x\neq y$ then 
+either $\langle x, y \rangle \in R$ or $\langle y, x \rangle \in R$. A relation 
+is \emph{connex}, or \emph{total}, when, for all $x,y \in X$, either $\langle x, 
+y \rangle \in R$ or $\langle y, x \rangle \in R$.)
+\newpage
+\noindent
+4. Call a relation $R$ on a set $S$ \emph{universal} when, for all $x, y \in S$, $\
+langle x, y \rangle \in R$. Let $R$ be an equivalence relation and define, for each
+$x \in S$, the set 
+$$[x] = \{y \in S : \langle x , y \rangle \in R\}$$
+\noindent
+Call this the \emph{equivalence class} of $x$ (with respect to $R$). Prove that all
+of the following are true:
+\begin{enumerate}
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\item $x \in [x]$, for all $x \in S$;
+\item $R$ is universal on each equivalence class $[x]$;
+\item Every element of $S$ is in one and only one equivalence class.
+\end{enumerate}
+\newpage
+\noindent
+5. Prove that the set $\{\neg, \land, \lor\}$ is truth-functionally complete. Hint:
+Consider the following truth table for some arbitrary binary connective $\circ$:
+\medskip
+\begin{center}
+\begin{tabular}{cc|c}
+$\varphi$ & $\psi$ & $\varphi \circ \psi$ \\ \hline
+$\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{v}_1$ \\
+$\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{v}_2$ \\
+$\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{v}_3$ \\
+$\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{v}_4$ \\
+\end{tabular}
+\end{center}
+\medskip
+\noindent
+where $\mathsf{v}_i$ is the truth value for that row. There are at least two 
+options now.  One is a brute force argument that is effective, but not so exciting.
+See if you can come up with a different one. Start by thinking about what you could
+do if all the values are $\mathsf{f}$. What would express such a function? Then 
+think about what would happen if one of the values were $\mathsf{t}$. How might you
+express that? Then go from there\dots
+\end{document}
