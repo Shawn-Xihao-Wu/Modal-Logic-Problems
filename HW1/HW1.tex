@@ -1,11 +1,12 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \title{PHIL 322---Modal Logic \\Homework 1}
 \author{Shawn Wu}
+\date{September 27, 2022}
 %Add your name and the date in the brackets above, and then remove the percentage 
 %sign from the beginning of the line. 
 %this just makes sure that all the standard math fonts/definitions/modes can be 
 %used.
-\usepackage{amsfonts, amsmath, amssymb, amsthm}
+\usepackage{amsfonts, amsmath, amssymb, amsthm, textcomp}
 %using fullpage does what you think it does, forces the full page to be used rather
 %than the LaTeX norm, which is a reasonably narrow column.
 \usepackage{fullpage}
@@ -18,7 +19,20 @@
 1. Call a binary relation $R$ on a set $S$ \emph{asymmetric} if for no $a,b \in S$ 
 both $\langle a, b \rangle \in R$ and $\langle b, a \rangle \in R$. Specify a 
 relation $R$ and a set $S$ such that $R$ is a relation on $S$ and $R$ is reflexive 
-and asymmetric. 
+and asymmetric. \\
+\\
+Let $S = \varnothing$ and $R = \varnothing$. $R$ is both relexive and asymmetric.\\
+
+\begin{proof}
+Note that a relation $R \subseteq S^2$ is relexive iff $\forall x \in S, \langle x ,x \rangle \in R.$ 
+Since $S$ is an empty set, there are no elements in $S$. This makes the above universally quantified statement vacously ture.
+Hence, $R$ is relexive.
+\\
+Also note that a relation $R \subseteq S^2$ is asymetric if for no pair $x,y \in S$ we have both $Rxy$ and $Ryx.$
+Since $S$ is empty, then we couldn't find any pairs of $x,y \in S$ that satisfy the mentioned properties.
+Hence, $R$ is asymmetric. 
+\end{proof}
+
 \newpage
 \noindent
 2. Prove that the transitive closure, $R^+$ of a binary relation $R$ is actually 

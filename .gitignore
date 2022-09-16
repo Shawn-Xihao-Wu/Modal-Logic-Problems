@@ -8,3 +8,6 @@
 *.log
 *.pdf
 *.synctex.gz
+
+##Notes
+latex_notes.md
