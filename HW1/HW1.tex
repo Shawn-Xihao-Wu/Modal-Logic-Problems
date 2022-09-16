@@ -1,7 +1,6 @@
 \documentclass[11pt]{article}
 \title{PHIL 322---Modal Logic \\Homework 1}
-\author{}
-%\date{}
+\author{Shawn Wu}
 %Add your name and the date in the brackets above, and then remove the percentage 
 %sign from the beginning of the line. 
 %this just makes sure that all the standard math fonts/definitions/modes can be 
@@ -10,40 +9,11 @@
 %using fullpage does what you think it does, forces the full page to be used rather
 %than the LaTeX norm, which is a reasonably narrow column.
 \usepackage{fullpage}
-%these commands allow you to declare theorems/lemmas/corollaries/definitions. They 
-%will all be numbered sequentially. That is, your document will remember what the 
-%last theorem number used was, and, the next theorem you write will have the 
-%subsequent number. As it is set up here, theorems, lemmas, etc. all share the same 
-%numbering sequence. That means, if you have a theorem and then a corollary, the 
-%theorem will be numbered as 1 as the corollary as 2.
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{definition}[theorem]{Definition}
-%To declare a theorem you can write:
-%
-%\begin{theorem}
-%There are infinitely many prime numbers.
-%\end{theorem}
-%
-%prime $p$. Then consider the number we get by taking 
-%
-%$$n=(2 \times 3 \times 5 \times 7 \times 11 \dots \times p) +1$$
-%
-%Clearly, $n$ cannot be prime, by our assumption. Therefore, it is composite. But 
-%the fundamental theorem of arithmetic tells us that every positive integer has a 
-(unique) prime factorization. This means that $n$ is evenly divided by some prime 
-number $q$. But notice that $q$ cannot be any of the primes between $2$ and $p$, 
-because these will all have a remainder of $1$. Therefore, $n$ must be a prime 
-factor greater than $p$. This is a contradiction.
-%
-%\end{proof}
 %Everything up to here was just setting things up. Everything that you will 
 %actually see occurs between the \begin{document} and \end{document} tags
 \begin{document}
 \maketitle
-%This gives your name, the date, and the rest of the information you might have 
-entered at the top of the file. 
+%This gives your name, the date, and the rest of the information you might have entered at the top of the file. 
 \noindent
 1. Call a binary relation $R$ on a set $S$ \emph{asymmetric} if for no $a,b \in S$ 
 both $\langle a, b \rangle \in R$ and $\langle b, a \rangle \in R$. Specify a 
