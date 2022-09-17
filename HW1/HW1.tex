@@ -19,17 +19,18 @@
 1. Call a binary relation $R$ on a set $S$ \emph{asymmetric} if for no $a,b \in S$ 
 both $\langle a, b \rangle \in R$ and $\langle b, a \rangle \in R$. Specify a 
 relation $R$ and a set $S$ such that $R$ is a relation on $S$ and $R$ is reflexive 
-and asymmetric. \\
-\\
-Let $S = \varnothing$ and $R = \varnothing$. $R$ is both relexive and asymmetric.\\
-
+and asymmetric.
+\begin{center}
+    $\ast$~$\ast$~$\ast$
+\end{center}
+Let $S = \varnothing$ and $R = \varnothing$. $R$ is both relexive and asymmetric.
 \begin{proof}
 Note that a relation $R \subseteq S^2$ is relexive iff $\forall x \in S, \langle x ,x \rangle \in R.$ 
 Since $S$ is an empty set, there are no elements in $S$. This makes the above universally quantified statement vacously ture.
 Hence, $R$ is relexive.
 \\
-Also note that a relation $R \subseteq S^2$ is asymetric if for no pair $x,y \in S$ we have both $Rxy$ and $Ryx.$
-Since $S$ is empty, then we couldn't find any pairs of $x,y \in S$ that satisfy the mentioned properties.
+Also note that a relation $R \subseteq S^2$ is asymmetric if for no pair $x,y \in S$ we have both $Rxy$ and $Ryx.$
+Since $S$ is empty, then we couldn't find any pairs of $x,y \in S$ that dissatisfy the mentioned properties.
 Hence, $R$ is asymmetric. 
 \end{proof}
 
@@ -46,17 +47,56 @@ $R$.
 \item Use this result to then argue that if $\langle a,b\rangle \in R^+$ and 
 $\langle b,c\rangle \in R^+$, then $\langle a,c\rangle \in R^+$.
 \end{enumerate}
+\begin{center}
+    $\ast$~$\ast$~$\ast$
+\end{center}
+\begin{proof}
+    
+\end{proof}
+
 \newpage
 \noindent
 3. Let $R \subseteq X^2$ be a binary relation on $X$ that is antisymmetric, 
 transitive and total/connex (notice that totality implies reflexivity). Show that 
 $$R' := \{\langle x,y \rangle \in X^2: \langle y, x \rangle \notin R\}$$
 \noindent
-is irreflexive, transitive, and connected/semi-connex. (A relation on $X$  is \
-emph{connected}, or \emph{semi-connex}, if, for all $x,y \in X$, if $x\neq y$ then 
+is irreflexive, transitive, and connected/semi-connex. (A relation on $X$  is \emph{connected}, 
+or \emph{semi-connex}, if, for all $x,y \in X$, if $x\neq y$ then 
 either $\langle x, y \rangle \in R$ or $\langle y, x \rangle \in R$. A relation 
 is \emph{connex}, or \emph{total}, when, for all $x,y \in X$, either $\langle x, 
 y \rangle \in R$ or $\langle y, x \rangle \in R$.)
+\begin{center}
+    $\ast$~$\ast$~$\ast$
+\end{center}
+\begin{proof}
+    First note that either $X = \varnothing$ or $X \neq \varnothing$.\\
+
+    \noindent\textbf{CASE 1}($X = \varnothing$): If $X = \varnothing$, then $\varnothing = R \subseteq X^2 = \varnothing$. 
+    Observe that the assumption on $R$ being antisymmetric, transitive and connex still holds.\\
+    
+    \indent 1) $R$ is vacously antisymmetric. Note that $R \subseteq X^2$ is antisymmetric iff
+    $\forall x, y \in X, ([Rxy \wedge Ryx] \implies x = y)$. Therefore, $R$ is \emph{not} antisymmetric 
+    iff $\exists x, y \in X, (Rxy \wedge Ryx \wedge x \neq y)$. Since $R$ is empty, then
+    we can't find a pair of $x, y$ in $R$ that satisfy the requirement. $R$ is not \emph{not} 
+    antisymmetric, hence antisymmetric.\\
+
+    \indent 2) $R$ is vacously transitive. Note that $R$ is \emph{not} transitive iff 
+    $\exists x,y,z \in X, (Rxy \wedge Ryz \wedge \neg Rxz)$. Since $R$ is empty, then we can't find
+    the corresponding pairs in $x,y,z$ that can satisfy the requirement. 
+    $R$ is not \emph{not} transitive, hence transitive.\\
+    
+    \indent 3) $R$ is vacously connex. Note that $R$ is \emph{not} connex iff
+    $\exists x, y \in X, (\neg Rxy \wedge \neg Ryx)$. Since $X$ is empty, we can't find the
+    corresponding pairs of $x, y$ that can satisfy the requirement. $R$ is not \emph{not} 
+    connex, hence connex.\\
+
+    \noindent We now show that $R'$ is irreflexive, transitive, and connected.
+    First note that $\varnothing = R' = \{\langle x,y \rangle \in X^2 = \varnothing: \langle y, x \rangle \notin R\}$.\\
+
+    \indent 1) $R'$ is irreflexive. 
+
+\end{proof}
+
 \newpage
 \noindent
 4. Call a relation $R$ on a set $S$ \emph{universal} when, for all $x, y \in S$, 
@@ -113,8 +153,7 @@ of the following are true:
     $s, x \in [\bar{x}]_R$. Thus, $\langle x, s \rangle \in R$, which means that 
     $s \in [x]_R$. We have $[x]_R \supseteq [\bar{x}]_R$. \\
     Therefore, $[x]_R = [\bar{x}]_R$. This means that any other equivalence classes $x$ is in
-    are just $[x]_R$. And every element of $S$ is in one and only one equivalence class.
-
+    are just $[x]_R$. Hence, every element of $S$ is in one and only one equivalence class.
 
 \end{proof}
 
@@ -140,4 +179,10 @@ See if you can come up with a different one. Start by thinking about what you co
 do if all the values are $\mathsf{f}$. What would express such a function? Then 
 think about what would happen if one of the values were $\mathsf{t}$. How might you
 express that? Then go from there\dots
+\begin{center}
+    $\ast$~$\ast$~$\ast$
+\end{center}
+\begin{proof}
+    
+\end{proof}
 \end{document}
