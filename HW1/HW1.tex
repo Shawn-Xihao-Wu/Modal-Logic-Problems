@@ -101,10 +101,20 @@ of the following are true:
 \begin{proof}
     Pick any $x \in S$. From $(a)$ we know that element $x$ is in at least one equivalence class, 
     namely $[x]_R$. We now show that $[x]_R$ is the only equivalence class with respect to 
-    $R$ that $x$ is in.
-    We know that $x \in [x]_R$ from $(a)$. But now suppose that $x \in [y]_R$ with
-    $y \in S$. We show that $[x]_R = [y]_R$.\\
-    Pick any $s \in [x]_R$, then we know that $\langle x,s \rangle \in R$. 
+    $R$ that $x$ is in.\\
+    We know that $x \in [x]_R$ from $(a)$. But now suppose that $x \in [\bar{x}]_R$ with
+    $\bar{x} \in S$. We show that $[x]_R = [\bar{x}]_R$.\\
+    Pick any $s \in [x]_R$, then we know that $\langle x,s \rangle \in R$ according to the
+    definition of equivalence class. Similarly, since $x \in [\bar{x}]_R$, we have 
+    $\langle \bar{x}, x \rangle \in R$. Thus, we have $\langle \bar{x}, s \rangle \in R$ 
+    as $R$ is transitive.
+    Hence, $s \in [\bar{x}]_R$. We have $[x]_R \subseteq [\bar{x}]_R$.\\
+    Now pick any $s \in [\bar{x}]_R$. From (b) we know that $R$ is univeral on $[\bar{x}]_R$ and 
+    $s, x \in [\bar{x}]_R$. Thus, $\langle x, s \rangle \in R$, which means that 
+    $s \in [x]_R$. We have $[x]_R \supseteq [\bar{x}]_R$. \\
+    Therefore, $[x]_R = [\bar{x}]_R$. This means that any other equivalence classes $x$ is in
+    are just $[x]_R$. And every element of $S$ is in one and only one equivalence class.
+
 
 \end{proof}
 
