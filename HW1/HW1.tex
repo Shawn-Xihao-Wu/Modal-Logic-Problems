@@ -43,8 +43,8 @@ transitive. You can do this however you like. Here is one suggestion:
 relation on $X$), then $\langle a,b \rangle \in R^n$ (as defined on page 191 of 
 your text) iff there is a path of length $n$ between $a$ and $b$ in the graph of 
 $R$. 
-\item Use this result to then argue that if $\langle a,b\rangle \in R^+$ and $\
-langle b,c\rangle \in R^+$, then $\langle a,c\rangle \in R^+$.
+\item Use this result to then argue that if $\langle a,b\rangle \in R^+$ and 
+$\langle b,c\rangle \in R^+$, then $\langle a,c\rangle \in R^+$.
 \end{enumerate}
 \newpage
 \noindent
@@ -59,8 +59,8 @@ is \emph{connex}, or \emph{total}, when, for all $x,y \in X$, either $\langle x,
 y \rangle \in R$ or $\langle y, x \rangle \in R$.)
 \newpage
 \noindent
-4. Call a relation $R$ on a set $S$ \emph{universal} when, for all $x, y \in S$, $\
-langle x, y \rangle \in R$. Let $R$ be an equivalence relation and define, for each
+4. Call a relation $R$ on a set $S$ \emph{universal} when, for all $x, y \in S$, 
+$\langle x, y \rangle \in R$. Let $R$ be an equivalence relation and define, for each
 $x \in S$, the set 
 $$[x] = \{y \in S : \langle x , y \rangle \in R\}$$
 \noindent
@@ -72,6 +72,42 @@ of the following are true:
 \item $R$ is universal on each equivalence class $[x]$;
 \item Every element of $S$ is in one and only one equivalence class.
 \end{enumerate}
+~~~
+\begin{center}
+    ------(a)------
+\end{center}
+\begin{proof}
+    Pick any $x \in S$ and let $[x]_R$ be the equivalence class defined above. 
+    Given $R$ is an equivalence relation, we have $\langle x,x \rangle \in R$ as $R$ is relexive.
+    Hence, $x \in [x]_R$.
+\end{proof}
+~~~
+\begin{center}
+    ------(b)------
+\end{center}
+\begin{proof}
+    Suppose we have a equivalence class $[x]_R$ as defined above. And suppose $p, q \in [x]_R$.
+    Since $p \in [x]_R,$ we have $\langle x, p \rangle \in R$. Since $q \in [x]_R$, we also have
+    $\langle x,q \rangle \in R$. Note that $R$ is symmetric as it is an equivalence relation;
+    therefore, we have $\langle p,x \rangle \in R$. Also note that $R$ is transitive as it is an
+    equivalence relation; therefore, $\langle p,q \rangle \in R$. Hence, $\forall x_1, x_2 \in [x]_R, 
+    \langle x_1, x_2 \rangle \in R$; $R$ is univeral on this equivalence class. Since we picked a
+    random equivalence class, $R$ is univeral on \emph{each} $[x]_R$.
+\end{proof}
+~~~
+\begin{center}
+    ------(c)------
+\end{center}
+\begin{proof}
+    Pick any $x \in S$. From $(a)$ we know that element $x$ is in at least one equivalence class, 
+    namely $[x]_R$. We now show that $[x]_R$ is the only equivalence class with respect to 
+    $R$ that $x$ is in.
+    We know that $x \in [x]_R$ from $(a)$. But now suppose that $x \in [y]_R$ with
+    $y \in S$. We show that $[x]_R = [y]_R$.\\
+    Pick any $s \in [x]_R$, then we know that $\langle x,s \rangle \in R$. 
+
+\end{proof}
+
 \newpage
 \noindent
 5. Prove that the set $\{\neg, \land, \lor\}$ is truth-functionally complete. Hint:

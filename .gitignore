@@ -10,4 +10,5 @@
 *.synctex.gz
 
 ##Notes
-latex_notes.md
+*.md
+!README.md
