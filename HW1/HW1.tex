@@ -25,12 +25,13 @@ and asymmetric.
 \end{center}
 Let $S = \varnothing$ and $R = \varnothing$. $R$ is both relexive and asymmetric.
 \begin{proof}
-Note that a relation $R \subseteq S^2$ is relexive iff $\forall x \in S, \langle x ,x \rangle \in R.$ 
-Since $S$ is an empty set, there are no elements in $S$. This makes the above universally quantified statement vacously ture.
-Hence, $R$ is relexive.
+Note that a relation $R \subseteq S^2$ is relexive iff $\forall x \in S, Rxx.$
+This means that $R$ is \emph{not} reflexive iff $\exists x \in S, \neg Rxx$.
+Since $S$ is an empty set, then can't find such $x \in S$ where $\neg Rxx$.
+Hence, $R$ is not \emph{not} relexive, hence relexive.\\
 \\
 Also note that a relation $R \subseteq S^2$ is asymmetric if for no pair $x,y \in S$ we have both $Rxy$ and $Ryx.$
-Since $S$ is empty, then we couldn't find any pairs of $x,y \in S$ that dissatisfy the mentioned properties.
+Since $S$ is empty, then we couldn't find such pair of $x,y \in S$ where $Rxy$ and $Ryx$.
 Hence, $R$ is asymmetric. 
 \end{proof}
 
@@ -47,12 +48,56 @@ $R$.
 \item Use this result to then argue that if $\langle a,b\rangle \in R^+$ and 
 $\langle b,c\rangle \in R^+$, then $\langle a,c\rangle \in R^+$.
 \end{enumerate}
+~~~
 \begin{center}
-    $\ast$~$\ast$~$\ast$
+    ------(a)------
 \end{center}
 \begin{proof}
-    
+    Let's first prove the forward direction of the iff statement. 
+    Notice that by the definition of $R^n$, we have,
+    \begin{align*}
+        R^{n}ab &\implies \exists y_1 \in X, (R^{n-1}ay_1 \land Ryb)\\
+            &\implies \exists y_2 \in X, (R^{n-2}ay_2 \land Ry_2y_1)\\
+            &\quad \vdots\\
+            &\implies \exists y_{n-2} \in X, (R^{2}ay_{n-2} \land Ry_{n-2}y_{n-3})\\
+            &\implies \exists y_{n-1} \in X, (R^{1}ay_{n-1} \land Ry_{n-1}y_{n-2})
+    \end{align*}
+    And by definition, $R^{1}ay_{n-1} = Ray_{n-1}$.\\
+    Hence, we have $y_1, y_2, \dots, y_{n-1} \in X$ s.t. $Ray_{n-1}, Ry_{n-1}y_{n-2}, Ry_{n-2}y_{n-3},, \dots ,Ry_2y_1, Ry_1b$.\\
+    Now, we can construct path of a length $n$ from $a$ to $b$ in the graph of $R$: 
+    $$a \to y_{n-1} \to y_{n-2} \to y_{n-2} \to \dots \to y_2 \to y_1 \to b$$
+    \\
+    Let's prove the other direction. Suppose there exists a path of length $n$ from $a$ to $b$ in the graph of $R$:
+    $$a \to x_1 \to x_2 \to \dots \to x_{n-2} \to x_{n-1} \to b$$
+    \\
+    where $x_1, x_2, \dots, x_{n-2}, x_{n-1} \in X$ s.t. $Rax_1, Rx_1x_2, \dots, Rx_{n-2}x_{n-1}, R_{n-1}b$.\\
+    \\
+    Thus, we have,
+    \begin{align*}
+        Rax_1 &\implies R^1ax_1 \tag{by definition of $R^1$}\\
+              &\implies R^2ax_2 \tag{since $R^1ax_1$ and $Rx_1x_2$}\\
+              &\implies R^3ax_3 \tag{since $R^2ax_2$ and $Rx_2x_3$}\\
+              &\quad \vdots\\
+              &\implies R^{n-2}ax_{n-2} \tag{since $R^{n-3}ax_{n-3}$ and $Rx_{n-3}x_{n-2}$}\\
+              &\implies R^{n-1}ax_{n-1} \tag{since $R^{n-2}ax_{n-2}$ and $Rx_{n-2}x_{n-1}$}\\
+              &\implies R^{n}ab \tag{since $R^{n-1}ax_{n-1}$ and $Rx_{n-1}b$}
+    \end{align*}
 \end{proof}
+~~~
+\begin{center}
+    ------(b)------
+\end{center}
+\begin{proof}
+    Suppose we have $\langle a,b \rangle \in R^+$ and $\langle b,c \rangle \in R^+$. 
+    Then there must exists $n_1 \in \mathbb{N}$ s.t. $\langle a, b \rangle \in R^{n_1} \subseteq R^+$, by the definition of $R^+$.
+    Similarly, there must exists $n_2 \in \mathbb{N}$ s.t. $\langle b, c \rangle \in R^{n_2} \subseteq R^+$.
+    Therefore, based on the results from (a), there must exists a path of length $n_1$ from $a$ to $b$ in the graph of $R$.
+    And similarly, a path of length $n_2$ from $b$ to $c$. 
+    This means that we would have a path of length $n_1 + n_2$ from $a$ to $c$ in the graph of $R$.
+    Hence, by (a), we have $\langle a, c \rangle \in R^{n_1 + n_2}$. 
+    Since $R^{n_1 + n_2} \subseteq R^+$, we arrive at $\langle a, c \rangle \in R^+$.
+\end{proof}
+
 
 \newpage
 \noindent
@@ -70,30 +115,100 @@ y \rangle \in R$ or $\langle y, x \rangle \in R$.)
 \end{center}
 \begin{proof}
     First note that either $X = \varnothing$ or $X \neq \varnothing$.\\
-
-    \noindent\textbf{CASE 1}($X = \varnothing$): If $X = \varnothing$, then $\varnothing = R \subseteq X^2 = \varnothing$. 
-    Observe that the assumption on $R$ being antisymmetric, transitive and connex still holds.\\
+    \\
+    \textbf{CASE 1 }($X = \varnothing$):\\
+    \\
+    If $X = \varnothing$, then $\varnothing = R \subseteq X^2 = \varnothing$. 
+    Observe that the assumption on $R$ being antisymmetric, transitive and total still holds.\\
     
-    \indent 1) $R$ is vacously antisymmetric. Note that $R \subseteq X^2$ is antisymmetric iff
+    \indent 1) $R$ is vacuously antisymmetric. Note that $R \subseteq X^2$ is antisymmetric iff
     $\forall x, y \in X, ([Rxy \wedge Ryx] \implies x = y)$. Therefore, $R$ is \emph{not} antisymmetric 
     iff $\exists x, y \in X, (Rxy \wedge Ryx \wedge x \neq y)$. Since $R$ is empty, then
     we can't find a pair of $x, y$ in $R$ that satisfy the requirement. $R$ is not \emph{not} 
     antisymmetric, hence antisymmetric.\\
 
-    \indent 2) $R$ is vacously transitive. Note that $R$ is \emph{not} transitive iff 
+    \indent 2) $R$ is vacuously transitive. Note that $R$ is \emph{not} transitive iff 
     $\exists x,y,z \in X, (Rxy \wedge Ryz \wedge \neg Rxz)$. Since $R$ is empty, then we can't find
     the corresponding pairs in $x,y,z$ that can satisfy the requirement. 
     $R$ is not \emph{not} transitive, hence transitive.\\
     
-    \indent 3) $R$ is vacously connex. Note that $R$ is \emph{not} connex iff
+    \indent 3) $R$ is vacuously total. Note that $R$ is \emph{not} total iff
     $\exists x, y \in X, (\neg Rxy \wedge \neg Ryx)$. Since $X$ is empty, we can't find the
     corresponding pairs of $x, y$ that can satisfy the requirement. $R$ is not \emph{not} 
-    connex, hence connex.\\
+    total, hence total.\\
 
     \noindent We now show that $R'$ is irreflexive, transitive, and connected.
     First note that $\varnothing = R' = \{\langle x,y \rangle \in X^2 = \varnothing: \langle y, x \rangle \notin R\}$.\\
 
-    \indent 1) $R'$ is irreflexive. 
+    \indent 1) \underline{$R'$ is vacuously irreflexive.} Note that $R'$ is irreflexive iff 
+    $\forall x \in X, R'xx$. Then $R'$ is vacuously irreflexive as $X$ is empty.
+    Or more percisely, Note that $R'$ is \emph{not} irreflexive iff 
+    $\exists x \in X, \neg R'xx$. But since $X$ is empty, then we can't find such $x \in X$
+    that fits the description, which makes $R'$ not \emph{not} irreflexive, hence irreflexive.\\
+
+    \indent 2) \underline{$R'$ is vacuously transitive.} It's similar as above but here's another argument.
+    Note that $R'$ is trantive iff $\forall x,y,z \in X, ([R'xy \wedge R'yz] \implies R'yz)$.
+    But since $R'$ is empty, the antecedent of the material conditional statement $R'xy \wedge R'yz$
+    is always false. This makes the universal statement always true, hence $R'$ is transitive.\\
+
+    \indent 3) \underline{$R'$ is vacuously connected.} Note that $R'$ is connected iff
+    $\forall x, y \in X, (x \neq y \implies [R'xy \lor R'yx])$. But since $X$ is empty, the antecedent 
+    of the material conditional statement $x \neq y$ can't be satisfied. This makes the universal 
+    statement always true, hence $R'$ is connected.\\
+    \\
+    \textbf{CASE 2 }($X \neq \varnothing$):\\
+    \\
+    If $X$ is nonempty, then either $\varnothing = R \subseteq X^2$ or $R \neq \varnothing$.
+    However, note that $R$ is total; thus, $\forall x \in X, \langle x,x \rangle \in R$.
+    Hence, it's necessary that $R \neq \varnothing$.\\
+    \\
+    \indent 1) \underline{$R'$ is irreflexive.}
+    Pick any $x \in X$. We have $Rxx$ as shown before.
+    Therefore, $\neg R'xx$ according to the definition of $R'$. Hence, $R'$ is irreflexive.\\
+
+    \indent 2) \underline{$R'$ is transitive.}
+    Suppose we have $R'xy$ and $R'yz$ for any $x,y,z \in X$. 
+    Notice that since we've etablished that $R'$ is irreflexive, $x \neq y$ and $y \neq z$; 
+    otherwise, we would have $R'xx$ or $R'zz$, which would cause contradictions.
+    From $R'yx$, we would have $\neg Ryx$, and similarly $\neg Rzy$ from $R'yz$. 
+    Note that $R$ is total, meaning that there must a tuple in $R$ for any two elements in $X$. 
+    Therefore, if $\neg Ryx$, then $Rxy$, and similiarly, if $\neg Rzy$, then $Ryz$.
+    Also note that $R$ is transitive. Therefore, we arrive at $Rxz$ as we have both $Rxy$ and $Ryz$.\\
+    \\
+    Now, we have two cases. Either $x \neq z$ or $x = z$.\\
+    \\
+    CASE 2.1 ($x \neq z$): 
+    Since $R$ is also antisymmetric, then if $x \neq z$, then either $\neg Rxz$ or $\neg Rzx$. Since $Rxz$, then it's necessary that $\neg Rzx$.
+    Therefore, we arrive at $R'xz$ based on the definition of $R'$. $R'$ is transitive in 
+    this case.\\
+    \\
+    CASE 2.2 ($x = z$): 
+    Since we have both $Rxy$ and $Ryz$, if $x = z$, then we instead have both $Rxy$ and $Ryx$. 
+    However, note that $R$ is antisymmetric; therefore, $x = y$.
+    This is a contradiction because it's necessary that $x \neq y$.
+    We have now violated our first set of assumptions. 
+    Hence, it's not possible that $x = z$ and we can dismiss this case.\\
+    \\
+    Thus, $\forall x,y,z \in X, ([R'xy \land R'yz] \implies R'zy)$, meaning $R'$ is transitive.\\
+    \\
+    Also notice that in order to have both $R'xy$ and $R'yz$, it's necessary that $x \neq y, y \neq z$ and $x \neq z$ according to previous discussions.
+    However, if we could't find such $x,y,z$ s.t. $(R'xy \land R'yz)$, like when $|X|<3$, then the above antecedent $(R'xy \wedge R'yz)$ would be always false.
+    Therefore, $R'$ is vacuously transitive in this case.\\
+
+    \indent 3) \underline{$R'$ is connected.}
+    Pick any $x,y \in X$ s.t. $x \neq y$. 
+    Since $R$ is antisymmetric, then either $\neg Rxy$ or (inclusive) $\neg Ryx$.
+    But since $R$ is also total, then either $Rxy$ or (inclusive) $Ryx$.
+    Thus taking together, we have either $(\neg Rxy \land Ryx)$ or (exclusive) $(Rxy \land \neg Ryx)$.
+    If it's $(\neg Rxy \land Ryx)$, then by definition, we have $R'xy$.
+    Similarly, if it's $(Rxy \land \neg Ryx)$, then $R'yx$.
+    Thus, $\forall x, y \in X, (x \neq y \implies R'xy \lor R'yx)$.
+    $R'$ is connected.\\
+    \\
+    Similarly, if we couldn't find a pair of $x, y \in X$ s.t. $x \neq y$, like when $|X| = 1,$ then the antecedent of the mateiral condition is always false.
+    $R'$ is vacously connected in this case.
+
+
 
 \end{proof}
 
@@ -183,6 +298,201 @@ express that? Then go from there\dots
     $\ast$~$\ast$~$\ast$
 \end{center}
 \begin{proof}
-    
+    We need to show that given any truth function $f \colon \{\mathsf{t}, \mathsf{f}\}^{n \in \mathbb{N}} \longmapsto \{\mathsf{t}, \mathsf{f}\}$, $f$ can be described by $f_{\neg},f_{\lor}, f_{\land}$.\\
+    \\
+    Suppose we have a $f \colon \{\mathsf{t}, \mathsf{f}\}^n \longmapsto \{\mathsf{t}, \mathsf{f}\}, n \in \mathbb{N}$.
+    $f$ inputs a n-tuple of truth values from $n$ distinct propersitional variables $\psi_1, \psi_2, \dots, \psi_n$, and outputs either $\mathsf{t}$ or $\mathsf{f}$.
+    We thus have $2^n$ possibilities for inputs and 2 possibilities for outputs. 
+    Hence, in total $2^{2^n}$ possible mappings for any fixed $n$.
+    And $f$ is one of the $2^{2^n}$ possible mappings.\\
+    \\
+    Note that each mapping (function) can be described by a truth table.
+    Therefore, we will have $2^{2^n}$ different truth tables.
+    Each truth table has $2^n$ rows.
+    And each row is a tuple of truth values of the propositional variables given by valuation function $v$ and the output of $f$,
+    $$\langle v(\psi_1), v(\psi_2), \dots, v(\psi_n), f \rangle$$
+    \\
+    We need to construct a WFF for each truth table, using $\psi_1, \psi_2, \dots, \psi_n$ with only $\neg, \land, \lor$ as connectives, that has the same output as $f$ given the same input.\\
+    \\
+    We first show that we can construct a WFF for each truth table that represents one of $4 = 2^{2^1}$ possible mappings when $n = 1$.
+    Here there are,
+    \begin{center}
+        \begin{tabular}{c|c}
+            $\varphi$ & $\varphi \lor \neg \varphi$\\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$\\
+            $\mathsf{f}$ & $\mathsf{t}$\\
+        \end{tabular}
+        ~~~
+        \begin{tabular}{c|c}
+            $\varphi$ & $\varphi$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$\\
+            $\mathsf{f}$ & $\mathsf{f}$\\
+        \end{tabular}
+        ~~~
+        \begin{tabular}{c|c}
+            $\varphi$ & $\neg \varphi$\\ \hline
+            $\mathsf{t}$ & $\mathsf{f}$\\
+            $\mathsf{f}$ & $\mathsf{t}$\\
+        \end{tabular}
+        ~~~
+        \begin{tabular}{c|c}
+            $\varphi$ & $\varphi \land \neg \varphi$\\ \hline
+            $\mathsf{t}$ & $\mathsf{f}$\\
+            $\mathsf{f}$ & $\mathsf{f}$\\
+        \end{tabular}
+    \end{center}
+    $$$$\\
+    Then for each $n \geq 2$, we construct a WFF for each truth table using the following algorithm:\\
+    \\
+    We first look for tuples where $f = \mathsf{t}$.
+    For each such tuple, we first make each propositional variable a conjunct,
+    $$(\psi_1 \land \psi_2 \land \dots \land \psi_n)$$
+    If $v(\psi_i) = \mathsf{f}, i \leq n$, then we put $\neg$ in front of it.
+    For example, if $n = 5$ and $v(\psi_2) = v(\psi_3) = \mathsf{f}$, then the conjuction would be,
+    $$(\psi_1 \land \neg \psi_2 \land \neg \psi_3 \land \psi_4 \land \psi_5)$$
+    We do this for all the tuples, and use $\lor$ to connect all of them.\\
+    \\
+    If we can't find a tuple where $f = \mathsf{t}$ (i.e. all rows are $\mathsf{f}$).
+    Then we simply put the negation of the WFF for when all rows are $\mathsf{t}$.\\
+    \\
+    And here are all $16 = 2^{2^2}$ possible mappings when $n = 2$ and their each WFF that expresses the same truth value, using the algorithm:
+
+    \begin{center}
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\varphi \land \neg \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\varphi \land \neg \psi) \lor (\neg \varphi \land \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\varphi \land \neg \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\neg \varphi \land \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $\varphi \land \psi$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \neg \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \neg \psi) \lor (\neg \varphi \land \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \neg \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $\varphi \land \neg \psi$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $\neg \varphi \land \psi$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $\neg \varphi \land \neg \psi$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $\neg [(\varphi \land \psi) \lor (\varphi \land \neg \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)]$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+    \end{center}
+$$$$
+The algorithm works because each long conjuction of the resulting WFF will only be true with the inputs from its tuple.
+Since we also then connect them with disjunction, we then have made sure that the resulting WFF will only be true whenever $f$ is true.
+This preserves the information.\\
+\\
+Hence, for any truth function $f$, we can can construct a WFF using only $\{\neg, \land, \lor\}$ that gives the same output.
+The set $\{\neg, \land, \lor\}$ is truth-functionally complete.
+
 \end{proof}
 \end{document}
