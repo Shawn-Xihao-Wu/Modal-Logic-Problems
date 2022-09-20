@@ -298,18 +298,19 @@ express that? Then go from there\dots
     $\ast$~$\ast$~$\ast$
 \end{center}
 \begin{proof}
-    We need to show that given any truth function $f \colon \{\mathsf{t}, \mathsf{f}\}^{n \in \mathbb{N}} \longmapsto \{\mathsf{t}, \mathsf{f}\}$, $f$ can be described by $f_{\neg},f_{\lor}, f_{\land}$.\\
+    We need to show that given any truth function $f \colon \{\mathsf{t}, \mathsf{f}\}^{n \in \mathbb{N}} \longmapsto \{\mathsf{t}, \mathsf{f}\}$, $f$ can be described by $f_{\neg} \colon \{\mathsf{t}, \mathsf{f}\} \longmapsto \{\mathsf{t}, \mathsf{f}\} $ and $f_{\lor}, f_{\land} \colon \{\mathsf{t}, \mathsf{f}\}^2 \longmapsto \{\mathsf{t}, \mathsf{f}\}$.\\
     \\
     Suppose we have a $f \colon \{\mathsf{t}, \mathsf{f}\}^n \longmapsto \{\mathsf{t}, \mathsf{f}\}, n \in \mathbb{N}$.
-    $f$ inputs a n-tuple of truth values from $n$ distinct WFFs $\psi_1, \psi_2, \dots, \psi_n$, and outputs either only $\mathsf{t}$ or only $\mathsf{f}$.
+    $f$ inputs a n-tuple of truth values and outputs either only $\mathsf{t}$ or only $\mathsf{f}$.
     We thus have $2^n$ possibilities for inputs and 2 possibilities for outputs. 
     Hence, in total $2^{2^n}$ possible mappings.
     And $f$ is one of the $2^{2^n}$ possible mappings, for any fixed $n$.\\
     \\
     Note that each mapping (function) can be described by a truth table.
-    Therefore, for each $n$, we will have $2^{2^n}$ different truth tables.
+    For each $n$, the n-tuple of truth values are from $n$ distinct propositional variables $\psi_1, \psi_2, \dots, \psi_n$.
     Each truth table has $2^n$ rows.
-    And each row is a tuple of truth values of the WFFs given by valuation function $v$ and the output of $f$,
+    We have in total $2^{2^n}$ different truth tables.
+    And each row is a tuple of truth values given by valuation function $v$ and the output of $f$,
     $$\langle v_1(\psi_1), v_2(\psi_2), \dots, v_n(\psi_n), f \rangle$$
     \\
     We need to construct a WFF for each truth table, using $\psi_1, \psi_2, \dots, \psi_n$ with only $\neg, \land, \lor$ as connectives, that has the same output as $f$ given the same input.
@@ -342,9 +343,9 @@ express that? Then go from there\dots
             $\mathsf{f}$ & $\mathsf{f}$\\
         \end{tabular}
     \end{center}
-    Thus, suppose $f$ can be captured by the first table, then we know $f(v(\psi)) = f_{\lor}(\psi, f_{\neg}(\psi))$.
-    
-    $$$$
+    Thus, suppose $f$ can be captured by the first table, then we know 
+    $$f(x) = f_{\lor}(x, f_{\neg}(x)), x \in \{\mathsf{t},\mathsf{f}\}$$
+    \\
     Then for each $n \geq 2$, we construct a WFF for each truth table using the following algorithm:\\
     \\
     We first look for tuples where $f = \mathsf{t}$.
@@ -370,6 +371,14 @@ express that? Then go from there\dots
         \end{tabular}
         ~~
         \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $\neg [(\varphi \land \psi) \lor (\varphi \land \neg \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)]$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
             $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\varphi \land \neg \psi) \lor (\neg \varphi \land \psi)$ \\ \hline
             $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
             $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
@@ -386,17 +395,17 @@ express that? Then go from there\dots
         \end{tabular}
         ~~
         \begin{tabular}{cc|c}
-            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\varphi \land \neg \psi)$ \\ \hline
-            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
-            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
-            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
-            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
-        \end{tabular}
-        ~~
-        \begin{tabular}{cc|c}
             $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
             $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
             $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $(\varphi \land \neg \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
             $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
             $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
         \end{tabular}
@@ -410,26 +419,18 @@ express that? Then go from there\dots
         \end{tabular}
         ~~
         \begin{tabular}{cc|c}
-            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\varphi \land \neg \psi)$ \\ \hline
             $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
-            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
-            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
-            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
-        \end{tabular}
-        ~~
-        \begin{tabular}{cc|c}
-            $\varphi$ & $\psi$ & $\varphi \land \psi$ \\ \hline
-            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
-            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
             $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
             $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
         \end{tabular}
         ~~
         \begin{tabular}{cc|c}
-            $\varphi$ & $\psi$ & $(\varphi \land \neg \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
-            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
-            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
-            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\varphi$ & $\psi$ & $(\varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
             $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
         \end{tabular}
         ~~
@@ -450,19 +451,27 @@ express that? Then go from there\dots
         \end{tabular}
         ~~
         \begin{tabular}{cc|c}
-            $\varphi$ & $\psi$ & $\varphi \land \neg \psi$ \\ \hline
-            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
-            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
-            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
-            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
-        \end{tabular}
-        ~~
-        \begin{tabular}{cc|c}
             $\varphi$ & $\psi$ & $(\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)$ \\ \hline
             $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
             $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
             $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
             $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+        \end{tabular}
+        ~~~~~~~~~~~~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $\varphi \land \psi$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{t}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
+        \end{tabular}
+        ~~
+        \begin{tabular}{cc|c}
+            $\varphi$ & $\psi$ & $\varphi \land \neg \psi$ \\ \hline
+            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
+            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
+            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
         \end{tabular}
         ~~
         \begin{tabular}{cc|c}
@@ -480,21 +489,13 @@ express that? Then go from there\dots
             $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
             $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{t}$ \\
         \end{tabular}
-        ~~
-        \begin{tabular}{cc|c}
-            $\varphi$ & $\psi$ & $\neg [(\varphi \land \psi) \lor (\varphi \land \neg \psi) \lor (\neg \varphi \land \psi) \lor (\neg \varphi \land \neg \psi)]$ \\ \hline
-            $\mathsf{t}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
-            $\mathsf{t}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
-            $\mathsf{f}$ & $\mathsf{t}$ & $\mathsf{f}$ \\
-            $\mathsf{f}$ & $\mathsf{f}$ & $\mathsf{f}$ \\
-        \end{tabular}
     \end{center}
 $$$$
-Thus, suppose $f$ is the first table in the third last row, then 
-$$f(v(\varphi),v(\psi)) = f_{\lor}(f_{\land}(\varphi,f_{\neg}(\psi)),f_{\land}(f_{\neg}(\varphi),f_{\neg}(\psi)))$$
+Thus, suppose $f$ is the first table in the second last row, then 
+$$f(x,y) = f_{\lor}(f_{\land}(x,f_{\neg}(y)),f_{\land}(f_{\neg}(x),f_{\neg}(y))), \; x, y \in \{\mathsf{t}, \mathsf{f}\}$$
 The algorithm works because each long conjuction of the resulting WFF will only be true with the inputs from its tuple.
-Since we also then connect them with disjunction, we then have made sure that the resulting WFF will only be true whenever $f$ is true.
-This preserves the information.\\
+Since we also then connect them with disjunction, we have made sure that the resulting WFF will only be true whenever $f$ is true.
+This preserves the mapping of each $f$.\\
 \\
 Hence, for any truth function $f$, $f$ can be expressed by a composition of $f_{\neg}, f_{\land}, f_{\lor}$.
 The set $\{\neg, \land, \lor\}$ is truth-functionally complete.
