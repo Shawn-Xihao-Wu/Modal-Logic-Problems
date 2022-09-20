@@ -301,18 +301,19 @@ express that? Then go from there\dots
     We need to show that given any truth function $f \colon \{\mathsf{t}, \mathsf{f}\}^{n \in \mathbb{N}} \longmapsto \{\mathsf{t}, \mathsf{f}\}$, $f$ can be described by $f_{\neg},f_{\lor}, f_{\land}$.\\
     \\
     Suppose we have a $f \colon \{\mathsf{t}, \mathsf{f}\}^n \longmapsto \{\mathsf{t}, \mathsf{f}\}, n \in \mathbb{N}$.
-    $f$ inputs a n-tuple of truth values from $n$ distinct propersitional variables $\psi_1, \psi_2, \dots, \psi_n$, and outputs either $\mathsf{t}$ or $\mathsf{f}$.
+    $f$ inputs a n-tuple of truth values from $n$ distinct WFFs $\psi_1, \psi_2, \dots, \psi_n$, and outputs either only $\mathsf{t}$ or only $\mathsf{f}$.
     We thus have $2^n$ possibilities for inputs and 2 possibilities for outputs. 
-    Hence, in total $2^{2^n}$ possible mappings for any fixed $n$.
-    And $f$ is one of the $2^{2^n}$ possible mappings.\\
+    Hence, in total $2^{2^n}$ possible mappings.
+    And $f$ is one of the $2^{2^n}$ possible mappings, for any fixed $n$.\\
     \\
     Note that each mapping (function) can be described by a truth table.
-    Therefore, we will have $2^{2^n}$ different truth tables.
+    Therefore, for each $n$, we will have $2^{2^n}$ different truth tables.
     Each truth table has $2^n$ rows.
-    And each row is a tuple of truth values of the propositional variables given by valuation function $v$ and the output of $f$,
+    And each row is a tuple of truth values of the WFFs given by valuation function $v$ and the output of $f$,
     $$\langle v(\psi_1), v(\psi_2), \dots, v(\psi_n), f \rangle$$
     \\
-    We need to construct a WFF for each truth table, using $\psi_1, \psi_2, \dots, \psi_n$ with only $\neg, \land, \lor$ as connectives, that has the same output as $f$ given the same input.\\
+    We need to construct a WFF for each truth table, using $\psi_1, \psi_2, \dots, \psi_n$ with only $\neg, \land, \lor$ as connectives, that has the same output as $f$ given the same input.
+    So that each $f$ can be written as a compositions of $f_{\neg}, f_{\lor}, f_{\land}$.\\
     \\
     We first show that we can construct a WFF for each truth table that represents one of $4 = 2^{2^1}$ possible mappings when $n = 1$.
     Here there are,
@@ -341,7 +342,9 @@ express that? Then go from there\dots
             $\mathsf{f}$ & $\mathsf{f}$\\
         \end{tabular}
     \end{center}
-    $$$$\\
+    Thus, suppose $f$ can be captured by the first table, then we know $f(v(\psi)) = f_{\lor}(\psi, f_{\neg}(\psi))$.
+    
+    $$$$
     Then for each $n \geq 2$, we construct a WFF for each truth table using the following algorithm:\\
     \\
     We first look for tuples where $f = \mathsf{t}$.
@@ -487,11 +490,13 @@ express that? Then go from there\dots
         \end{tabular}
     \end{center}
 $$$$
+Thus, suppose $f$ is the first table in the third last row, then 
+$$f(v(\varphi),v(\psi)) = f_{\lor}(f_{\land}(\varphi,f_{\neg}(\psi)),f_{\land}(f_{\neg}(\varphi),f_{\neg}(\psi)))$$
 The algorithm works because each long conjuction of the resulting WFF will only be true with the inputs from its tuple.
 Since we also then connect them with disjunction, we then have made sure that the resulting WFF will only be true whenever $f$ is true.
 This preserves the information.\\
 \\
-Hence, for any truth function $f$, we can can construct a WFF using only $\{\neg, \land, \lor\}$ that gives the same output.
+Hence, for any truth function $f$, $f$ can be expressed by a composition of $f_{\neg}, f_{\land}, f_{\lor}$.
 The set $\{\neg, \land, \lor\}$ is truth-functionally complete.
 
 \end{proof}
