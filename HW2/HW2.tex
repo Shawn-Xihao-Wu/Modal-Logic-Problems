@@ -19,6 +19,8 @@
 \newcommand{\s}{\vDash}
 \newcommand{\ns}{\nvDash}
 
+\renewcommand\qedsymbol{$\blacksquare$}
+
 \begin{document}
 \maketitle
 %This gives your name, the date, and the rest of the information you might have entered at the top of the file. 
@@ -26,7 +28,7 @@
 \begin{center}
     ------(1)------
 \end{center}
-Claim: if $F \vDash \D p \rightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is partially functional. 
+Claim 1: if $F \vDash \D p \rightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is partially functional. 
 \begin{proof} Proof by contrapositive.\\
     Suppose $R$ is not partially functional, then there exists $w, u, v \in W$ s.t. $(Rwu \land Rwv)$ but $u \neq v$.
     Define a model $M$ based on $F$ where $V(p) = \{ u \}$. 
@@ -41,10 +43,32 @@ Claim: if $F \vDash \D p \rightarrow \B p$ where $F = \langle W, R \rangle$, the
 \begin{center}
     $\ast$~$\ast$~$\ast$
 \end{center}
-Claim: if $F \vDash \D p \leftrightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is functional. 
+Claim 2: if $F \vDash \D p \leftrightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is functional. 
 \begin{proof} Proof by contrapositive\\
     Suppose $R$ is not functional, then $\exists w \forall v \exists u (Rwu \iff u \neq v)$.
-    Define a model $M$ based on $F$ where 
+    Define a model $M$ based on $F$ where for any $w_1, w_2 \in W$, if we have $Rww_1$ and $Rww_2$ where $w_1 \neq w_2$, then either $w_1 \notin V(p)$ or $w_2 \notin V(p)$ but not both.\\
+    \\
+    Thus, suppose $M, w \s \D p$, then there exists $x \in W$ such that $Rwx$ and $M, x \s p$.
+    Since $R$ is not functional, then there exists $y$ such that $x \neq y \iff Rwy$.\\
+    Note that either we have $x = y$ or $x \neq y$. 
+    However, it can't be the case that $x = y$ because $x = y \implies \neg Rwy \implies \neg Rwx$, which would contradict our original assumption.
+    Thus, $x \neq y$.\\
+    Since $x \neq y$, then we have $Rwy$.
+    By our design of $M$, we know the it must be that case that $y \notin V(p)$.
+    Hence, $M, y \ns p$. This entails that $M, w \ns \B p$ or $M, w \s \neg \B p$.\\
+    \\
+    Now, suppose $M, w \s \neg \B p$, then there must exist $x \in W$ such that $Rwx$ but $M,x \s \neg P$.
+    Since $R$ is not functional, then there exists $y$ such that $x \neq y \iff Rwy$.\\
+    Note again that we have either $x = y$ or $x \neq y$. 
+    Similarly, it can't be the case that $x = y$ because $x = y \implies \neg Rwy \implies \neg Rwx$, which contradicts our original assumption.
+    Thus, $x \neq y$.\\
+    Since $x \neq y$, then we have $Rwy$. By our design of $M$, we know that it must be the case that $y \in V(p)$.
+    Hence, $M, y \s p$. This means that $M, w \s \D p$.\\
+    \\
+    Together we have $M, w \s \D p \leftrightarrow \neg \B p$ or in other words $M, w \ns \D p \leftrightarrow \B p$. 
+    This means that $M \ns \D p \leftrightarrow \B p$, which in term means that $F \ns \D p \leftrightarrow \B p$.
+
+
 
 \end{proof}
 
@@ -52,7 +76,7 @@ Claim: if $F \vDash \D p \leftrightarrow \B p$ where $F = \langle W, R \rangle$,
 \begin{center}
     $\ast$~$\ast$~$\ast$
 \end{center}
-Claim: if $F \vDash \B \B p \rightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is weakly dense. 
+Claim 3: if $F \vDash \B \B p \rightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is weakly dense. 
 \begin{proof} Proof by contrapositive.\\
     Suppose $R$ is not weakly dense, then $\exists u \exists v (Ruv \land \forall w(\neg Ruw \lor \neg Rwv))$.
     Define a model $M$ based on $F$ where $\forall x \in W,$ $x \in V(p)$ expect when $x = v$.\\
@@ -71,7 +95,7 @@ Claim: if $F \vDash \B \B p \rightarrow \B p$ where $F = \langle W, R \rangle$, 
 \begin{center}
     $\ast$~$\ast$~$\ast$
 \end{center}
-Claim: if $F \vDash \B((p \land \B p) \to q) \lor \B((q \land \B q) \to p)$ where $F = \langle W, R \rangle$, then $R$ is weakly connected. 
+Claim 4: if $F \vDash \B((p \land \B p) \to q) \lor \B((q \land \B q) \to p)$ where $F = \langle W, R \rangle$, then $R$ is weakly connected. 
 \begin{proof}
     
 \end{proof}
@@ -80,7 +104,7 @@ Claim: if $F \vDash \B((p \land \B p) \to q) \lor \B((q \land \B q) \to p)$ wher
 \begin{center}
     $\ast$~$\ast$~$\ast$
 \end{center}
-Claim: if $F \vDash \D \B p \to \B \D p$ where $F = \langle W, R \rangle$, then $R$ is weakly directed. 
+Claim 5: if $F \vDash \D \B p \to \B \D p$ where $F = \langle W, R \rangle$, then $R$ is weakly directed. 
 \begin{proof}
     
 \end{proof}
