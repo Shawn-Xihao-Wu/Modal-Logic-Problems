@@ -96,8 +96,24 @@ Claim 3: if $F \vDash \B \B p \rightarrow \B p$ where $F = \langle W, R \rangle$
     $\ast$~$\ast$~$\ast$
 \end{center}
 Claim 4: if $F \vDash \B((p \land \B p) \to q) \lor \B((q \land \B q) \to p)$ where $F = \langle W, R \rangle$, then $R$ is weakly connected. 
-\begin{proof}
-    
+\begin{proof} Proof by contrapositive.\\
+    Suppose $R$ is not weakly connected, then $\exists w \exists u \exists v (Rwu \land Rwv \land \neg Ruv \land u \neq v \land \neg Rvu)$.
+    Define a model $M$ based on $F$ where
+    \begin{enumerate}
+        \item $u \in V(p), u \notin V(q)$, and if $\forall x \in W, Rux$, then $x \in V(p)$
+        \item $v \in V(q), v \notin V(p)$, and if $\forall y \in W, Rvy$, then $y \in V(q)$
+    \end{enumerate}
+    Note that this defintion of $M$ is possible because of the constraint $(\neg Ruv \land u \neq v \land \neg Rvu)$.
+    Since we have $u \neq v$, then it's possible that we have $u \in V(p), u \notin V(q), v \in V(q), v \notin V(p)$.
+    And since there are no accessibility relation between $u$ and $v$, then it's possible that $Rux \implies x \in V(p)$ and $Rvy \implies y \in V(q)$.\\
+    Therefore, we have $M, u \s (p \land \B p) \land \neg q$ and $M, v \s (q \land \B q) \land \neg p$.\\
+    Since $Rwu$ and $Rwv$, then we have $M, w \s \D ((p \land \B p) \land \neg q)$ and $M, w \s \D ((q \land \B q) \land \neg p)$.\\
+    Equivalently, we have $M, w \s \neg \B ((p \land \B p) \to q)$ and $M, w \s \neg \B ((q \land \B q) \to p)$.\\
+    Or, $M, w \s \neg \B ((p \land \B p) \to q) \land \neg \B ((q \land \B q) \to p)$.\\
+    Or in other words, $M, w \s \neg(\B ((p \land \B p) \to q) \lor \B ((q \land \B q) \to p))$.\\
+    At last, we arrive at $M, w \ns \B ((p \land \B p) \to q) \lor \B ((q \land \B q) \to p)$.\\
+    Therefore, $F \ns \B ((p \land \B p) \to q) \lor \B ((q \land \B q) \to p)$.
+
 \end{proof}
 
 \noindent
