@@ -79,8 +79,8 @@ Claim 2: if $F \vDash \D p \leftrightarrow \B p$ where $F = \langle W, R \rangle
 Claim 3: if $F \vDash \B \B p \rightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is weakly dense. 
 \begin{proof} Proof by contrapositive.\\
     Suppose $R$ is not weakly dense, then $\exists u \exists v (Ruv \land \forall w(\neg Ruw \lor \neg Rwv))$.
-    Define a model $M$ based on $F$ where $\forall x \in W,$ $x \in V(p)$ expect when $x = v$.\\
-    (\emph{Note: }we are able to define such $M$ because it's necessary that $u \neq v$. If $u = v$, then would have $Ruv$ and $\neg Ruv \lor \neg Rvv$, which would contradict our original assumption.)\\
+    Define a model $M$ based on $F$ where $\forall x \in W,$ $x \in V(p)$ expect when $x = v$.
+    Note that we are able to define such $M$ because it's necessary that $u \neq v$. If $u = v$, then would have $Ruv$ and $\neg Ruv \lor \neg Rvv$, which would contradict our original assumption.\\
     Since we have $Ruv$ but $M, v \ns p$, thus $M, u \ns \B p$.
     However, note that it's necessary that $M, u \s \B \B p$.
     It's because in order to have $M, u \ns \B \B p$, there must exist a $w \in W$ such that $Ruw$ and $Rwv$, i.e., a path of length $2$ from $u$ to $v$.
@@ -105,8 +105,17 @@ Claim 4: if $F \vDash \B((p \land \B p) \to q) \lor \B((q \land \B q) \to p)$ wh
     $\ast$~$\ast$~$\ast$
 \end{center}
 Claim 5: if $F \vDash \D \B p \to \B \D p$ where $F = \langle W, R \rangle$, then $R$ is weakly directed. 
-\begin{proof}
-    
+\begin{proof} Proof by contrapositive.\\
+    Suppose $R$ is not weakly directed.
+    Then $\exists w \exists u \exists v ((Rwu \land Rwv) \land \forall t(\neg Rut \lor \neg Rvt))$.
+    Define a model $M$ based on $F$ where if $Rux$, then $x \in V(p)$ but if $Rvy$, then $y \notin V(p)$.
+    Note that such model of $M$ is possible because we won't be in a situation where $Rux$ and $Rvy$ and $x = y$ given the fact that $R$ is not weakly connected.\\
+    In this model, we can see that $M, u \s \B p$, which means that $M, w \s \D \B p$ since $Rwu$.
+    However, note that $M, v \s \B \neg p$ is also true in our model. 
+    This means that $M, w \s \D \B \neg p$, which is also equivalent to $M, w \s \neg \B \D p$.\\
+    Therefore, there exists a model $M$ based on $F$ and $w \in W$ s.t. $M, w \s \D \B p$ but $M, w \s \neg \B \D p$.
+    This means that $M, w \ns \D \B p \to \B \D p$, which means that $F \ns \D \B p \to \B \D p$.
+
 \end{proof}
 
 \newpage
