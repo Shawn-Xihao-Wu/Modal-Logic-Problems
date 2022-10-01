@@ -114,14 +114,25 @@ Claim 5: if $F \vDash \D \B p \to \B \D p$ where $F = \langle W, R \rangle$, the
 \begin{center}
     ------(2a)------
 \end{center}
-\begin{proof}
-    
+Claim: if $F$ is serial, then $F \s (\B A \land \B (\neg A \lor B)) \to \D B$.
+\begin{proof} Proof by contradiction.
+    Suppose $F$ is serial but $F \ns (\B A \land \B (\neg A \lor B)) \to \D B$.\\
+    Then there exists a model $M$ based on $F$ and $w \in W$ s.t. $M, w \ns (\B A \land \B (\neg A \lor B)) \to \D B$.
+    This means that we have $M, w \s \B A \land \B (\neg A \lor B)$, but at the same time $M, w \ns \D B$.\\
+    Since $F$ is also serial, then there exists $v \in W$ s.t. $Rwv$. 
+    Also, since $M, w \ns \D B$, we know that $M, v \ns B$.\\
+    Note that $M, w \s \B A \land \B (\neg A \lor B)$, meaning that $M, w \s \B A$ and $M, w \s \B (\neg A \lor B)$. 
+    Since we have $Rwv$, then $M, v \s A$ and $M, v \s \neg A \lor B$.
+    This means that it must the case that $M, v \s B$.\\
+    This creats a contradiction that we have both $M,v \s B$ and $M, v \ns B$.
+    Hence the orignal statement is true.
 \end{proof}
 
 \noindent
 \begin{center}
     ------(2b)------
 \end{center}
+Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$.
 \begin{proof}
     
 \end{proof}
