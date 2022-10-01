@@ -133,8 +133,16 @@ Claim: if $F$ is serial, then $F \s (\B A \land \B (\neg A \lor B)) \to \D B$.
     ------(2b)------
 \end{center}
 Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$.
-\begin{proof}
-    
+\begin{proof} Proof by contradiction.
+    Suppose $F$ is transitive and relaxive, but $F \ns \D \D (A \land B) \to \D B$.\\
+    Then there exists a model $M$ based on $F$ and $w \in W$ s.t. $M, w \ns \D \D (A \land B) \to \D B$.
+    Or more precisely, $M, w \s \D \D (A \land B)$ but $M, w \ns \D B$.\\
+    From $M, w \s \D \D (A \land B)$, we know that there exists $u \in W$ s.t. $Rwu$ and $M, u \s \D (A \land B)$.
+    And from $M, u \s \D (A \land B)$, we know that there exists $v \in W$ s.t. $Ruv$ and $M, v \s A \land B$.\\
+    Since $F$ is transitive, then $Rwv$. However, we have $M,v \s B$ from $M, v \s A \land B$.
+    This means that $M, w \s \D B$.\\
+    Therefore, we reach that $M, w \ns \D B$ and $M, w \s \D B$, a contradiction.
+    The original statement is true.
 \end{proof}
 
 \newpage
