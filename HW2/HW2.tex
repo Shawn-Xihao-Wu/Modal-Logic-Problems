@@ -184,6 +184,29 @@ Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$
 \begin{center}
     ------(3b)------
 \end{center} 
+\begin{fitch}
+    \fa \neg A \lor A                                                       & TAUT\\
+    \fa \B (\neg A \lor A)                                                  & NEC, 1\\
+    \fa \B (\neg A \lor A) \to \D (\neg A \lor A)                           & \textbf{D}\\
+    \fa \D (\neg A \lor A)                                                  & MP, 2, 3\\
+    \fa \D (\neg A \lor A) \leftrightarrow \neg \B \neg (\neg A \lor A)     & DUAL\\
+    \fa (\D (\neg A \lor A) \leftrightarrow \neg \B \neg (\neg A \lor A)) \to (\D (\neg A \lor A) \to \neg \B \neg (\neg A \lor A)) & TAUT\\
+    \fa \D (\neg A \lor A) \to \neg \B \neg (\neg A \lor A)                 & MP, 5, 6\\
+    \fa \neg \B \neg (\neg A \lor A)                                        & MP, 4, 7\\
+    \fa (A \land \neg A) \to \neg (\neg A \lor A)                           & TAUT\\
+    \fa \B((A \land \neg A) \to \neg (\neg A \lor A))                       & NEC, 9\\
+    \fa \B((A \land \neg A) \to \neg (\neg A \lor A)) \to (\B (A \land \neg A) \to \B (\neg (\neg A \lor A)))   & \textbf{K}\\
+    \fa \B (A \land \neg A) \to \B (\neg (\neg A \lor A))                   & MP, 10, 11\\
+    \fa (\B (A \land \neg A) \to \B (\neg (\neg A \lor A))) \to (\neg \B (\neg (\neg A \lor A)) \to \neg \B (A \land \neg A))   & TAUT\\
+    \fa \neg \B (\neg (\neg A \lor A)) \to \neg \B (A \land \neg A)         & MP, 12, 13\\
+    \fa \neg \B (A \land \neg A)                                            & MP, 8, 14\\
+\end{fitch}
+\\
+\\
+\\
+Note that line $6, 13$ are respectively the subsitution instances of 
+$$(p \leftrightarrow q) \to (p \to q),$$
+$$(p \to q) \to (\neg q \to \neg p).$$
 
 
 
