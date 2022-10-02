@@ -6,7 +6,7 @@
 %sign from the beginning of the line. 
 %this just makes sure that all the standard math fonts/definitions/modes can be 
 %used.
-\usepackage{amsfonts, amsmath, amssymb, amsthm, textcomp}
+\usepackage{amsfonts, amsmath, amssymb, amsthm, textcomp, derivation}
 %using fullpage does what you think it does, forces the full page to be used rather
 %than the LaTeX norm, which is a reasonably narrow column.
 \usepackage{fullpage}
@@ -67,9 +67,6 @@ Claim 2: if $F \vDash \D p \leftrightarrow \B p$ where $F = \langle W, R \rangle
     \\
     Together we have $M, w \s \D p \leftrightarrow \neg \B p$ or in other words $M, w \ns \D p \leftrightarrow \B p$. 
     This means that $M \ns \D p \leftrightarrow \B p$, which in turn means that $F \ns \D p \leftrightarrow \B p$.
-
-
-
 \end{proof}
 
 \noindent
@@ -175,18 +172,19 @@ Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$
 \noindent
 \begin{center}
     ------(3a)------
-\end{center} 
-\begin{proof}
-    
-\end{proof}
+\end{center}
+\begin{fitch}
+    \fa \neg A \to (A \to B)                                        & TAUT \\
+    \fa \B (\neg A \to (A \to B))                                   & NEC, 1\\
+    \fa \B (\neg A \to (A \to B)) \to (\B \neg A \to \B (A \to B))  & \textbf{K}\\
+    \fa \B \neg A \to \B (A \to B)                                  & MP, 2, 3
+\end{fitch}
 
 \noindent
 \begin{center}
     ------(3b)------
 \end{center} 
-\begin{proof}
-    
-\end{proof}
+
 
 
 \newpage
