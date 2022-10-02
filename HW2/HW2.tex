@@ -28,10 +28,10 @@
 \begin{center}
     ------(1)------
 \end{center}
-Claim 1: if $F \vDash \D p \rightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is partially functional. 
+Claim 1: if $F \vDash \D p \rightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ of $F$ is partially functional. 
 \begin{proof} Proof by contrapositive.\\
     Suppose $R$ is not partially functional, then there exists $w, u, v \in W$ s.t. $(Rwu \land Rwv)$ but $u \neq v$.
-    Define a model $M$ based on $F$ where $V(p) = \{ u \}$. 
+    Define a model $M = \langle F, V \rangle$ where $V(p) = \{ u \}$ (and $V$ is arbitary otherwise). 
     Note that $v \notin V(p)$ because $u \neq v$.
     Therefore, we have $M, w \vDash \D p$ because $Rwu$ and $M, u \vDash p$.
     However, $M, w \nvDash \B p$ since $Rwv$ and $M, v \ns p$.\\
@@ -46,7 +46,7 @@ Claim 1: if $F \vDash \D p \rightarrow \B p$ where $F = \langle W, R \rangle$, t
 Claim 2: if $F \vDash \D p \leftrightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is functional. 
 \begin{proof} Proof by contrapositive\\
     Suppose $R$ is not functional, then there exists $w \in W$ s.t. $\forall v \exists u (Rwu \iff u \neq v)$.
-    Define a model $M$ based on $F$ s.t. for any $w_1, w_2 \in W$ where $w_1 \neq w_2$, if we have $Rww_1$ and $Rww_2$, then either $w_1 \notin V(p)$ or $w_2 \notin V(p)$ but not both.\\
+    Define a model $M = \langle F, V \rangle$ s.t. for any $w_1, w_2 \in W$ where $w_1 \neq w_2$, if we have $Rww_1$ and $Rww_2$, then either $w_1 \notin V(p)$ or $w_2 \notin V(p)$ but not both (and $V$ is arbitary otherwise).\\
     \\
     Thus, suppose $M, w \s \D p$, then there exists $x \in W$ such that $Rwx$ and $M, x \s p$.
     Since $R$ is not functional, then there exists $y$ such that $x \neq y \iff Rwy$.\\
@@ -79,7 +79,7 @@ Claim 2: if $F \vDash \D p \leftrightarrow \B p$ where $F = \langle W, R \rangle
 Claim 3: if $F \vDash \B \B p \rightarrow \B p$ where $F = \langle W, R \rangle$, then $R$ is weakly dense. 
 \begin{proof} Proof by contrapositive.\\
     Suppose $R$ is not weakly dense, then $\exists u \exists v (Ruv \land \forall w(\neg Ruw \lor \neg Rwv))$.
-    Define a model $M$ based on $F$ where $\forall x \in W,$ $x \in V(p)$ expect when $x = v$.\\
+    Define a model $M = \langle F, V \rangle$ where $\forall x \in W,$ $x \in V(p)$ except when $x = v$ (and $V$ is arbitary otherwise).\\
 %    First note it's necessary that $u \neq v$. If $u = v$, then would have $Ruv$ and $\neg Ruv \lor \neg Rvv$, which would contradict our original assumption.
     Since we have $Ruv$ but $M, v \ns p$, thus $M, u \ns \B p$.
     However, note that it's necessary that $M, u \s \B \B p$.
@@ -98,10 +98,11 @@ Claim 3: if $F \vDash \B \B p \rightarrow \B p$ where $F = \langle W, R \rangle$
 Claim 4: if $F \vDash \B((p \land \B p) \to q) \lor \B((q \land \B q) \to p)$ where $F = \langle W, R \rangle$, then $R$ is weakly connected. 
 \begin{proof} Proof by contrapositive.\\
     Suppose $R$ is not weakly connected, then $\exists w \exists u \exists v (Rwu \land Rwv \land \neg Ruv \land u \neq v \land \neg Rvu)$.
-    Define a model $M$ based on $F$ where
+    Define a model $M = \langle F, V \rangle$ where
     \begin{enumerate}
         \item $u \in V(p), u \notin V(q)$, and if $\forall x \in W, Rux$, then $x \in V(p)$
         \item $v \in V(q), v \notin V(p)$, and if $\forall y \in W, Rvy$, then $y \in V(q)$
+        \item ($V$ is arbitary otherwise)
     \end{enumerate}
     Note that this defintion of $M$ is possible because of the constraint $(\neg Ruv \land u \neq v \land \neg Rvu)$.
     Since we have $u \neq v$, then it's possible that we have $u \in V(p), u \notin V(q), v \in V(q), v \notin V(p)$.
@@ -124,12 +125,12 @@ Claim 5: if $F \vDash \D \B p \to \B \D p$ where $F = \langle W, R \rangle$, the
 \begin{proof} Proof by contrapositive.\\
     Suppose $R$ is not weakly directed.
     Then $\exists w \exists u \exists v ((Rwu \land Rwv) \land \forall t(\neg Rut \lor \neg Rvt))$.
-    Define a model $M$ based on $F$ s.t. for any $x, y \in W$, if $Rux$, then $x \in V(p)$, but if $Rvy$, then $y \notin V(p)$.
+    Define a model $M  = \langle F, V \rangle$ s.t. for any $x \in W$, if $Rux$, then $x \in V(p)$; for any $y \in W$, if $Rvy$, then $y \notin V(p)$; ($V$ is arbitary otherwise).\\
     Note that such model of $M$ is possible because we won't be in a situation where $Rux$ and $Rvy$ and $x = y$ given the fact that $R$ is not weakly connected.\\
     In this model, we can see that $M, u \s \B p$, which means that $M, w \s \D \B p$ since $Rwu$.
     However, note that $M, v \s \B \neg p$ is also true in our model. 
     This means that $M, w \s \D \B \neg p$, which is also equivalent to $M, w \s \neg \B \D p$.\\
-    Therefore, there exists a model $M$ based on $F$ and $w \in W$ s.t. $M, w \s \D \B p$ but $M, w \s \neg \B \D p$.
+    Therefore, $M, w \s \D \B p$ but $M, w \s \neg \B \D p$.
     This means that $M, w \ns \D \B p \to \B \D p$, which means that $F \ns \D \B p \to \B \D p$.
 
 \end{proof}
