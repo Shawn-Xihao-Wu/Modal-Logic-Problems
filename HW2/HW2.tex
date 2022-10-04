@@ -176,7 +176,7 @@ Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$
 \begin{fitch}
     \fa \neg A \to (A \to B)                                        & TAUT \\
     \fa \B (\neg A \to (A \to B))                                   & NEC, 1\\
-    \fa \B (\neg A \to (A \to B)) \to (\B \neg A \to \B (A \to B))  & \textbf{K}\\
+    \fa \B (\neg A \to (A \to B)) \to (\B \neg A \to \B (A \to B))  & K\\
     \fa \B \neg A \to \B (A \to B)                                  & MP, 2, 3
 \end{fitch}
 
@@ -187,7 +187,7 @@ Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$
 \begin{fitch}
     \fa \neg A \lor A                                                       & TAUT\\
     \fa \B (\neg A \lor A)                                                  & NEC, 1\\
-    \fa \B (\neg A \lor A) \to \D (\neg A \lor A)                           & \textbf{D}\\
+    \fa \B (\neg A \lor A) \to \D (\neg A \lor A)                           & D\\
     \fa \D (\neg A \lor A)                                                  & MP, 2, 3\\
     \fa \D (\neg A \lor A) \leftrightarrow \neg \B \neg (\neg A \lor A)     & DUAL\\
     \fa (\D (\neg A \lor A) \leftrightarrow \neg \B \neg (\neg A \lor A)) \to (\D (\neg A \lor A) \to \neg \B \neg (\neg A \lor A)) & TAUT\\
@@ -195,7 +195,7 @@ Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$
     \fa \neg \B \neg (\neg A \lor A)                                        & MP, 4, 7\\
     \fa (A \land \neg A) \to \neg (\neg A \lor A)                           & TAUT\\
     \fa \B((A \land \neg A) \to \neg (\neg A \lor A))                       & NEC, 9\\
-    \fa \B((A \land \neg A) \to \neg (\neg A \lor A)) \to (\B (A \land \neg A) \to \B (\neg (\neg A \lor A)))   & \textbf{K}\\
+    \fa \B((A \land \neg A) \to \neg (\neg A \lor A)) \to (\B (A \land \neg A) \to \B (\neg (\neg A \lor A)))   & K\\
     \fa \B (A \land \neg A) \to \B (\neg (\neg A \lor A))                   & MP, 10, 11\\
     \fa (\B (A \land \neg A) \to \B (\neg (\neg A \lor A))) \to (\neg \B (\neg (\neg A \lor A)) \to \neg \B (A \land \neg A))   & TAUT\\
     \fa \neg \B (\neg (\neg A \lor A)) \to \neg \B (A \land \neg A)         & MP, 12, 13\\
@@ -216,7 +216,27 @@ $$(p \to q) \to (\neg q \to \neg p).$$
     ------(4)------
 \end{center} 
 \begin{proof}
-    
+    Assume that $\vdash \D A \to B$. Then for some $n \in \mathbb{N}$,\\
+    \\
+    \begin{fitch}
+        \ftag{\vdots}{\fa \vdots} \\
+        \ftag{$n$}{\fa \D A \to B}\\
+        \ftag{$n+1$}{\fa \B (\D A \to B)}                                               & NEC, $n$\\
+        \ftag{$n+2$}{\fa \B (\D A \to B) \to (\B \D A \to \B B)}                        & K\\
+        \ftag{$n+3$}{\fa \B \D A \to \B B}                                              & MP, $n+1, n+2$\\
+        \ftag{$n+4$}{\fa A \to \B \D A}                                                 & B\\
+        \ftag{$n+5$}{\fa (A \to \B \D A) \to ((\B \D A \to \B B) \to (A \to \B B))}     & TAUT\\
+        \ftag{$n+6$}{\fa (\B \D A \to \B B) \to (A \to \B B)}                           & MP, $n+4, n+5$\\
+        \ftag{$n+7$}{\fa A \to \B B}                                                    & MP, $n+3, n+6$\\
+    \end{fitch}
+    \\
+    \\
+    \\
+    Note that line $n+5$ is a subsitution instance of 
+    $$(p \to q) \to ((q \to r) \to (p \to r)).$$
+    \\
+    Hence, we have $\vdash \D A \to B \implies \vdash A \to \B B$.
+
 \end{proof}
 
 
