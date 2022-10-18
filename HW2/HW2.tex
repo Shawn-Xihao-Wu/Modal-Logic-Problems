@@ -250,14 +250,20 @@ $$(p \to q) \to (\neg q \to \neg p).$$
 \end{center} 
 \begin{proof} $ $\\
     Let's first prove the forward implication.
-    Suppose $\Gamma$ is $\Sigma$-consistent, then $\Gamma \nvdash_{\Sigma} \bot$.
-    Let $A \equiv \bot$. Then there is some $A$ for which $\Gamma \nvdash_{\Sigma} A$.\\
+    Suppose $\Gamma$ is $\Sigma$-consistent, then $\Gamma \ndr \bot$.
+    Let $A \equiv \bot$. Then there is some $A$ for which $\Gamma \ndr A$.\\
     \\
     Let's prove the backward implication. We do proof by contrapositive.
-    Suppose $\Gamma$ is not $\Sigma$-consistent. Then $\Gamma \vdash_{\Sigma} \bot$.
-    This means that there exists $\{\psi_1, \dots, \psi_n \} \subseteq \Gamma$ where $n \in \mathbb{N}$ s.t. $\vdash_{\Sigma} (\psi_1 \land \dots \land \psi_n) \to \bot$.\\
-    Pick any formula $A$. Then $\bot \to A$ is a tautological instance and hence $\vdash_{\Sigma} \bot \to A$.\\
-    Therefore, from propositional logic, we can derive $\vdash_{\Sigma} (\psi_1 \land \dots \land \psi_n) \to A$, which means that $\Gamma \vdash A$.\\
+    Suppose $\Gamma$ is not $\Sigma$-consistent. Then $\Gamma \dr \bot$.
+    This means that there exists finite $\{\psi_1, \dots, \psi_n \} \subseteq \Gamma$ s.t. 
+    $$\dr (\psi_1 \land \dots \land \psi_n) \to \bot.$$
+    Pick any formula $A$. Then $\bot \to A$ is a tautological instance and hence 
+    $$\vdash_{\Sigma} \bot \to A.$$
+    Therefore, we can derive 
+    $$\dr (\psi_1 \land \dots \land \psi_n) \to A,$$ 
+    from the tautological instance
+    $[(\psi_1 \land \dots \land \psi_n) \to \bot] \to [(\bot \to A) \to ((\psi_1 \land \dots \land \psi_n) \to A)].$\\
+    This in turn means that $\Gamma \dr A$.\\
     Since $A$ is arbitrary, we can now say that for all $A$ we have $\Gamma \vdash_{\Sigma} A$. This concludes the proof.
 \end{proof}
 
@@ -267,17 +273,40 @@ $$(p \to q) \to (\neg q \to \neg p).$$
 \end{center} 
 \begin{proof} $ $\\
     Let's first prove the forward implication.
-    Suppose $\Gamma \vdash_{\Sigma} A$. 
+    Suppose $\Gamma \dr A$. 
     Then note that $\Gamma \subseteq \Gamma \cup \{\neg A\}$.
-    Hence, by the property of monotonicity, $\Gamma \cup \{\neg A\} \vdash_{\Sigma} A$.
+    Hence, by the property of monotonicity, $\Gamma \cup \{\neg A\} \dr A$.
     Also note that $\{\neg A\} \in \Gamma \cup \{\neg A\}$.
-    Hence, by the property of reflexivity, $\Gamma \cup \{\neg A\} \vdash_{\Sigma} \neg A$.\\
-    This means that $\Gamma \cup \{\neg A\} \vdash_{\Sigma} \neg A \land A$, which means that $\Gamma \cup \{\neg A\} \vdash_{\Sigma} \bot$.
+    Hence, by the property of reflexivity, $\Gamma \cup \{\neg A\} \dr \neg A$.\\
+    Since $\Gamma \cup \{\neg A\} \dr A$, then there exists finite $\{\phi_1, \dots \phi_n \} \subseteq \Gamma \cup \{\neg A\}$ s.t.
+    $$\dr (\phi_1 \land \dots \land \phi_n) \to A.$$
+    Similarly, since $\Gamma \cup \{\neg A\} \dr \neg A$, then there exists finite $\{\psi_1, \dots \psi_n \} \subseteq \Gamma \cup \{\neg A\}$ s.t.
+    $$\dr (\psi_1 \land \dots \land \psi_n) \to \neg A.$$
+    Note that we can have
+    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to A,$$
+    from the tautological instance
+    $[X \to A] \to [(X \land \psi_1 \land \dots \land \psi_n) \to A]$ where $X \equiv (\phi_1 \land \dots \land \phi_n)$.\\
+    Similarly, we can have
+    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to \neg A,$$
+    from the tautological instance
+    $[X \to \neg A] \to [(\phi_1 \land \dots \land \phi_n \land X) \to \neg A]$ where $X \equiv (\psi_1 \land \dots \land \psi_n)$.\\
+    Therefore, we have
+    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to (A \land \neg A),$$
+    from the tautological instance
+    $(X \to A) \to [(X \to \neg A) \to (X \to (A \land \neg A))]$ where $X \equiv (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n)$.\\
+    Note that $(A \land \neg A) \to \bot$ is a tautological instance. Therefore,
+    $$\dr (A \land \neg A) \to \bot.$$
+    This gives us that
+    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to \bot,$$
+    from the tautological instance,
+    $(X \to (A \land \neg A)) \to [((A \land \neg A) \to \bot) \to (X \to \bot)]$ where $X \equiv (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n)$.\\
+    This in turn means that $$\Gamma \cup \{\neg A\} \dr \bot,$$
+    since $\{\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n\} \subseteq \Gamma \cup \{\neg A\}$.\\
     So, $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent.\\
     \\
     Let's prove the backward implication.
-    We can use (5a) where it states that $\Gamma$ is not $\Sigma$-consistent iff for all $A$, we have $\Gamma \vdash_{\Sigma} A$.\\
-    Since $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent, then we have $\Gamma \vdash_{\Sigma} A$.
+    We can use (5a) where it states that $\Gamma$ is not $\Sigma$-consistent iff for all $A$, we have $\Gamma \dr A$.\\
+    Since $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent, then we have $\Gamma \dr A$.
 
 \end{proof}
 
@@ -291,13 +320,16 @@ $$(p \to q) \to (\neg q \to \neg p).$$
     Also, by the deduction theorem, we have $\Delta \dr A \to B$ since $\Delta \cup \{A\} \dr B$.
     And again, by monotonicity, we have $\Gamma \cup \Delta \dr A \to B$.\\
     \\
-    Since $\Gamma \cup \Delta \dr A$, then there exists finite $\{\phi_1 \land \dots \land \phi_n\} \subseteq \Gamma \cup \Delta$ s.t. $\dr (\phi_1 \land \dots \land \phi_n) \to A$.\\
-    Similarly, since $\Gamma \cup \Delta \dr A \to B$, then there exists finite $\{\psi_1 \land \dots \land \psi_n\} \subseteq \Gamma \cup \Delta$ s.t. $\dr (\psi_1 \land \dots \land \psi_n) \to (A \to B)$.\\
-    And by propositional logic, we have both
+    Since $\Gamma \cup \Delta \dr A$, then there exists finite $\{\phi_1 \land \dots \land \phi_n\} \subseteq \Gamma \cup \Delta$ s.t. 
+    $$\dr (\phi_1 \land \dots \land \phi_n) \to A.$$
+    Similarly, since $\Gamma \cup \Delta \dr A \to B$, then there exists finite $\{\psi_1 \land \dots \land \psi_n\} \subseteq \Gamma \cup \Delta$ s.t. 
+    $$\dr (\psi_1 \land \dots \land \psi_n) \to (A \to B).$$
+    And by similar process in 5(b), we have both
     $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to A$$ and
     $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to (A \to B)$$
-    Therefore, by propositional logic, we have
-    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to B$$
+    Therefore, we have
+    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to B,$$
+    from the tautological instance $[X \to (A \to B)] \to [(X \to A) \to (X \to B)]$ where $X \equiv (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n)$.\\
     This means that $\Gamma \cup \Delta \dr B$, since $\{\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n\} \subseteq \Gamma \cup \Delta$.
 \end{proof}
 
@@ -305,7 +337,26 @@ $$(p \to q) \to (\neg q \to \neg p).$$
 \begin{center}
     ------(5d)------
 \end{center} 
-\begin{proof}
+\begin{proof}$ $\\
+    Let's first do the forward implication. \\
+    Suppose $A \land B \in \Gamma$.
+    Then by reflexivity, $\Gamma \dr A \land B$.\\
+    Note that $(A \land B) \to A$ and $(A \land B) \to B$ are two tautological instances.\\
+    Therefore, according to proposition 3.36, part 5, $\Gamma \dr A$ and $\Gamma \dr B$.\\
+    Note that we cannot have $\neg A \in \Gamma$.
+    Otherwise, if $\neg A \in \Gamma$, then $\Gamma \dr \neg A$. 
+    Since $A \to (\neg A \to \bot)$ is a tautological instance, we have $\Gamma \dr \bot$.
+    This contradicts our original assumption where $\Gamma$ is $\Sigma$-consistent.\\
+    Similarly, we cannot have $\neg B \in \Gamma$.\\
+    Since $\Gamma$ is maximal, then we have $A \in \Gamma$ and $B \in \Gamma$.\\
+    \\
+    Let's do the backward implication.\\
+    Proof by contradiction. Suppose $A \in \Gamma$ and $B \in \Gamma$ but $A \land B \notin \Gamma$.\\
+    Since $\Gamma$ is maximal, then $\neg(A \land B) \in \Gamma$.
+    Therefore, by reflexivity, we have all three $\Gamma \dr A$, $\Gamma \dr B$, and $\Gamma \dr \neg (A \land B)$.\\
+    However, note that $A \to (B \to (\neg(A \land B) \to \bot))$ is a tautological instance.
+    Therefore, by proposition 3.36, part 5, $\Gamma \dr \bot$, which means that $\Gamma$ is not $\Sigma$-consistent.
+    This creates a contradictions.
     
 \end{proof}
 
@@ -313,7 +364,25 @@ $$(p \to q) \to (\neg q \to \neg p).$$
 \begin{center}
     ------(5e)------
 \end{center} 
-\begin{proof}
-    
+\begin{proof} $ $\\
+    Let's first do the forward implication.\\
+    Proof by contradiction. Suppose $A \to B \in \Gamma$ but $A \in \Gamma$ and $B \notin \Gamma$.\\
+    Since $\Gamma$ is maximal, then $\neg B \in \Gamma$.\\
+    Therefore, by reflexivity, we have $\Gamma \dr A$, $\Gamma \dr \neg B$, and $\Gamma \dr A \to B$.\\
+    Note that $A \to (\neg B \to ((A \to B) \to \bot))$ is a tautological instance.
+    Therefore, by proposition 3.36, part 5, $\Gamma \dr \bot$, which means that $\Gamma$ is not $\Sigma$-consistent.\\
+    This is a contradiction.\\
+    \\
+    Let's do the backward implication.\\
+    Proof by contrapositive. Suppose $A \to B \notin \Gamma$. We show that $A \in \Gamma$ and $B \notin \Gamma$.\\
+    Since $\Gamma$ is maximal, then $\neg(A \to B) \in \Gamma$.
+    Hence, $\Gamma \dr \neg(A \to B)$ by reflexivity.\\
+    Note that $\neg(A \to B) \to A$ and $\neg(A \to B) \to \neg B$ are two tautological instances.\\
+    Therefore, we have $\Gamma \dr A$ and $\Gamma \dr \neg B$.\\
+    Since $\Gamma$ is maximal $\Sigma$-consistent, then $\Gamma$ is deductively closed in $\Sigma$.\\
+    Therefore, we have $A \in \Gamma$ and $\neg B \in \Gamma$.\\
+    Hence, by the definition of maximality, we arrive at $A \in \Gamma$ and $B \notin \Gamma$.
+
+
 \end{proof}
 \end{document}
