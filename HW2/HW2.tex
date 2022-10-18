@@ -18,6 +18,9 @@
 \newcommand{\D}{\Diamond}
 \newcommand{\s}{\vDash}
 \newcommand{\ns}{\nvDash}
+\newcommand{\dr}{\vdash_{\Sigma}}
+\newcommand{\ndr}{\nvdash_{\Sigma}}
+
 
 \renewcommand\qedsymbol{$\blacksquare$}
 
@@ -99,9 +102,9 @@ Claim 4: if $F \vDash \B((p \land \B p) \to q) \lor \B((q \land \B q) \to p)$ wh
     \begin{enumerate}
         \item $u \in V(p), u \notin V(q)$, and if $\forall x \in W, Rux$, then $x \in V(p)$
         \item $v \in V(q), v \notin V(p)$, and if $\forall y \in W, Rvy$, then $y \in V(q)$
-        \item ($V$ is arbitary otherwise)
+        \item ($V$ is arbitrary otherwise)
     \end{enumerate}
-    Note that this defintion of $M$ is possible because of the constraint $(\neg Ruv \land u \neq v \land \neg Rvu)$.
+    Note that this definition of $M$ is possible because of the constraint $(\neg Ruv \land u \neq v \land \neg Rvu)$.
     Since we have $u \neq v$, then it's possible that we have $u \in V(p), u \notin V(q), v \in V(q), v \notin V(p)$.
     And since there are no accessibility relation between $u$ and $v$, then it's possible that $Rux \implies x \in V(p)$ and $Rvy \implies y \in V(q)$.\\
     Therefore, we have $M, u \s (p \land \B p) \land \neg q$ and $M, v \s (q \land \B q) \land \neg p$.\\
@@ -147,17 +150,17 @@ Claim: if $F$ is serial, then $F \s (\B A \land \B (\neg A \lor B)) \to \D B$.
     Note that $M, w \s \B A \land \B (\neg A \lor B)$, meaning that $M, w \s \B A$ and $M, w \s \B (\neg A \lor B)$. 
     Since we have $Rwv$, then $M, v \s A$ and $M, v \s \neg A \lor B$.
     This means that it must the case that $M, v \s B$.\\
-    This creats a contradiction that we have both $M,v \s B$ and $M, v \ns B$.
-    Hence the orignal statement is true.
+    This creates a contradiction that we have both $M,v \s B$ and $M, v \ns B$.
+    Hence the original statement is true.
 \end{proof}
 
 \noindent
 \begin{center}
     ------(2b)------
 \end{center}
-Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$.
+Claim: if $F$ is transitive and reflexive, then $F \s \D \D (A \land B) \to \D B$.
 \begin{proof} Proof by contradiction.
-    Suppose $F$ is transitive and relaxive, but $F \ns \D \D (A \land B) \to \D B$.\\
+    Suppose $F$ is transitive and reflexive, but $F \ns \D \D (A \land B) \to \D B$.\\
     Then there exists a model $M$ based on $F$ and $w \in W$ s.t. $M, w \ns \D \D (A \land B) \to \D B$.
     Or more precisely, $M, w \s \D \D (A \land B)$ but $M, w \ns \D B$.\\
     From $M, w \s \D \D (A \land B)$, we know that there exists $u \in W$ s.t. $Rwu$ and $M, u \s \D (A \land B)$.
@@ -204,7 +207,7 @@ Claim: if $F$ is transitive and relaxive, then $F \s \D \D (A \land B) \to \D B$
 \\
 \\
 \\
-Note that line $6, 13$ are respectively the subsitution instances of 
+Note that line $6, 13$ are respectively the substitution instances of 
 $$(p \leftrightarrow q) \to (p \to q),$$
 $$(p \to q) \to (\neg q \to \neg p).$$
 
@@ -232,10 +235,10 @@ $$(p \to q) \to (\neg q \to \neg p).$$
     \\
     \\
     \\
-    Note that line $n+5$ is a subsitution instance of 
+    Note that line $n+5$ is a substitution instance of 
     $$(p \to q) \to ((q \to r) \to (p \to r)).$$
     \\
-    Hence, we have $\vdash \D A \to B \implies \vdash A \to \B B$.
+    Hence, we have $\vdash_{\textbf{B}} \D A \to B \implies \vdash_{\textbf{B}} A \to \B B$.
 
 \end{proof}
 
@@ -245,16 +248,37 @@ $$(p \to q) \to (\neg q \to \neg p).$$
 \begin{center}
     ------(5a)------
 \end{center} 
-\begin{proof}
-    
+\begin{proof} $ $\\
+    Let's first prove the forward implication.
+    Suppose $\Gamma$ is $\Sigma$-consistent, then $\Gamma \nvdash_{\Sigma} \bot$.
+    Let $A \equiv \bot$. Then there is some $A$ for which $\Gamma \nvdash_{\Sigma} A$.\\
+    \\
+    Let's prove the backward implication. We do proof by contrapositive.
+    Suppose $\Gamma$ is not $\Sigma$-consistent. Then $\Gamma \vdash_{\Sigma} \bot$.
+    This means that there exists $\{\psi_1, \dots, \psi_n \} \subseteq \Gamma$ where $n \in \mathbb{N}$ s.t. $\vdash_{\Sigma} (\psi_1 \land \dots \land \psi_n) \to \bot$.\\
+    Pick any formula $A$. Then $\bot \to A$ is a tautological instance and hence $\vdash_{\Sigma} \bot \to A$.\\
+    Therefore, from propositional logic, we can derive $\vdash_{\Sigma} (\psi_1 \land \dots \land \psi_n) \to A$, which means that $\Gamma \vdash A$.\\
+    Since $A$ is arbitrary, we can now say that for all $A$ we have $\Gamma \vdash_{\Sigma} A$. This concludes the proof.
 \end{proof}
 
 \noindent
 \begin{center}
     ------(5b)------
 \end{center} 
-\begin{proof}
-    
+\begin{proof} $ $\\
+    Let's first prove the forward implication.
+    Suppose $\Gamma \vdash_{\Sigma} A$. 
+    Then note that $\Gamma \subseteq \Gamma \cup \{\neg A\}$.
+    Hence, by the property of monotonicity, $\Gamma \cup \{\neg A\} \vdash_{\Sigma} A$.
+    Also note that $\{\neg A\} \in \Gamma \cup \{\neg A\}$.
+    Hence, by the property of reflexivity, $\Gamma \cup \{\neg A\} \vdash_{\Sigma} \neg A$.\\
+    This means that $\Gamma \cup \{\neg A\} \vdash_{\Sigma} \neg A \land A$, which means that $\Gamma \cup \{\neg A\} \vdash_{\Sigma} \bot$.
+    So, $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent.\\
+    \\
+    Let's prove the backward implication.
+    We can use (5a) where it states that $\Gamma$ is not $\Sigma$-consistent iff for all $A$, we have $\Gamma \vdash_{\Sigma} A$.\\
+    Since $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent, then we have $\Gamma \vdash_{\Sigma} A$.
+
 \end{proof}
 
 \noindent
@@ -262,7 +286,19 @@ $$(p \to q) \to (\neg q \to \neg p).$$
     ------(5c)------
 \end{center} 
 \begin{proof}
-    
+    Suppose $\Gamma \dr A$ and $\Delta \cup \{A\} \dr B$.\\
+    Then note that $\Gamma \subseteq \Gamma \cup \Delta$; hence, by monotonicity, we have $\Gamma \cup \Delta \dr A$ since $\Gamma \dr A$.
+    Also, by the deduction theorem, we have $\Delta \dr A \to B$ since $\Delta \cup \{A\} \dr B$.
+    And again, by monotonicity, we have $\Gamma \cup \Delta \dr A \to B$.\\
+    \\
+    Since $\Gamma \cup \Delta \dr A$, then there exists finite $\{\phi_1 \land \dots \land \phi_n\} \subseteq \Gamma \cup \Delta$ s.t. $\dr (\phi_1 \land \dots \land \phi_n) \to A$.\\
+    Similarly, since $\Gamma \cup \Delta \dr A \to B$, then there exists finite $\{\psi_1 \land \dots \land \psi_n\} \subseteq \Gamma \cup \Delta$ s.t. $\dr (\psi_1 \land \dots \land \psi_n) \to (A \to B)$.\\
+    And by propositional logic, we have both
+    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to A$$ and
+    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to (A \to B)$$
+    Therefore, by propositional logic, we have
+    $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to B$$
+    This means that $\Gamma \cup \Delta \dr B$, since $\{\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n\} \subseteq \Gamma \cup \Delta$.
 \end{proof}
 
 \noindent
