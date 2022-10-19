@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 \title{PHIL 322---Modal Logic \\Homework 2}
-\author{Shawn Wu}
+\author{Shawn Wu (with Johnny Xiao)}
 \date{October 18, 2022}
 %Add your name and the date in the brackets above, and then remove the percentage 
 %sign from the beginning of the line. 
@@ -53,19 +53,22 @@ Claim 2: if $F \vDash \D p \leftrightarrow \B p$ where $F = \langle W, R \rangle
     \\
     Thus, suppose $M, w \s \D p$, then there exists $x \in W$ such that $Rwx$ and $M, x \s p$.
     Since $R$ is not functional, then there exists $y$ such that $x \neq y \iff Rwy$.\\
-    Note that either we have $x = y$ or $x \neq y$. 
-    However, it can't be the case that $x = y$ because $x = y \implies \neg Rwy \implies \neg Rwx$, which would contradict our original assumption.
+    Now, note that either we have $x = y$ or $x \neq y$. 
+    However, it can't be the case that $x = y$ because $x = y \implies \neg Rwy \implies \neg Rwx$, which would contradict the fact that $Rwx$.\\
     Thus, $x \neq y$.\\
-    Since $x \neq y$, then we have $Rwy$.
-    By our design of $M$, we know the it must be that case that $y \notin V(p)$.
+    Since $x \neq y$, then we have $Rwy$.\\
+    Now, we have $Rwx$, $Rwy$, $x \neq y$, and $x \in V(p)$ from $(M, x \s p)$.
+    By our design of $M$, we know that it must be that case that $y \notin V(p)$.
     Hence, $M, y \ns p$. This entails that $M, w \ns \B p$ or $M, w \s \neg \B p$.\\
     \\
     Now, suppose $M, w \s \neg \B p$, then there must exist $x \in W$ such that $Rwx$ but $M,x \s \neg P$.
     Since $R$ is not functional, then there exists $y$ such that $x \neq y \iff Rwy$.\\
-    Note again that we have either $x = y$ or $x \neq y$. 
-    Similarly, it can't be the case that $x = y$ because $x = y \implies \neg Rwy \implies \neg Rwx$, which contradicts our original assumption.
+    Now, note again that we have either $x = y$ or $x \neq y$. 
+    Similarly, it can't be the case that $x = y$ because $x = y \implies \neg Rwy \implies \neg Rwx$, which contradicts the fact that $Rwx$.\\
     Thus, $x \neq y$.\\
-    Since $x \neq y$, then we have $Rwy$. By our design of $M$, we know that it must be the case that $y \in V(p)$.
+    Since $x \neq y$, then we have $Rwy$.\\
+    Now, we have $Rwx$, $Rwy$, $x \neq y$, and $x \notin V(p)$ from $(M, x \ns p)$. 
+    By our design of $M$, we know that it must be the case that $y \in V(p)$.
     Hence, $M, y \s p$. This means that $M, w \s \D p$.\\
     \\
     Together we have $M, w \s \D p \leftrightarrow \neg \B p$ or in other words $M, w \ns \D p \leftrightarrow \B p$. 
@@ -81,11 +84,17 @@ Claim 3: if $F \vDash \B \B p \rightarrow \B p$ where $F = \langle W, R \rangle$
     Suppose $R$ is not weakly dense, then $\exists u \exists v (Ruv \land \forall w(\neg Ruw \lor \neg Rwv))$.
     Define a model $M = \langle F, V \rangle$ where $\forall x \in W,$ $x \in V(p)$ except when $x = v$ (and $V$ is arbitary otherwise).\\
 %    First note it's necessary that $u \neq v$. If $u = v$, then would have $Ruv$ and $\neg Ruv \lor \neg Rvv$, which would contradict our original assumption.
-    Since we have $Ruv$ but $M, v \ns p$, thus $M, u \ns \B p$.
-    However, note that it's necessary that $M, u \s \B \B p$.
-    It's because in order to have $M, u \ns \B \B p$, there must exist a $w \in W$ such that $Ruw$ and $Rwv$, i.e., a path of length $2$ from $u$ to $v$.
-    However, we instead have that for all $w \in W$, either $\neg Ruw$ or $\neg Rwv$.
-    So, it's impossible to have a path of length 2 from $u$ to $v$.\\
+    Since, $v \notin V(p)$, then $M, v \ns p$.
+    Since we also have $Ruv$, then $M, u \ns \B p$.\\
+    \\
+    Now, note that it's necessary that $M, u \s \B \B p$.
+    It's because in order to have $M, u \ns \B \B p$, we must have $M, u \s \D \D \neg p$.\\
+    Note that for all $w \in W$, only $M, w \s \neg p$ when $w = v$ from our design of $M$.
+    Thus, if $M, u \s \D \D \neg p$, then there must exist $w \in W$ such that $Ruw$ and $Rwv$, i.e., a path of length $2$ from $u$ to $v$.\\
+    However, since $R$ is not weakly dense, we instead have that for all $w \in W$, either $\neg Ruw$ or $\neg Rwv$.
+    So, it's impossible to have a path of length 2 from $u$ to $v$.
+    This confirms that $M, u \s \B \B p$.\\ 
+    \\
     Hence, $M, u \ns \B \B p \to \B p$, meaning that $M \ns \B \B p \to \B p$.
     This means that $F \ns \B \B p \to \B p$.
 
@@ -100,19 +109,30 @@ Claim 4: if $F \vDash \B((p \land \B p) \to q) \lor \B((q \land \B q) \to p)$ wh
     Suppose $R$ is not weakly connected, then $\exists w \exists u \exists v (Rwu \land Rwv \land \neg Ruv \land u \neq v \land \neg Rvu)$.
     Define a model $M = \langle F, V \rangle$ where
     \begin{enumerate}
-        \item $u \in V(p), u \notin V(q)$, and if $\forall x \in W, Rux$, then $x \in V(p)$
-        \item $v \in V(q), v \notin V(p)$, and if $\forall y \in W, Rvy$, then $y \in V(q)$
+        \item $u \in V(p), u \notin V(q)$, and $\forall x \in W$, if $Rux$, then $x \in V(p)$
+        \item $v \in V(q), v \notin V(p)$, and $\forall y \in W$, if $Rvy$, then $y \in V(q)$
         \item ($V$ is arbitrary otherwise)
     \end{enumerate}
     Note that this definition of $M$ is possible because of the constraint $(\neg Ruv \land u \neq v \land \neg Rvu)$.
     Since we have $u \neq v$, then it's possible that we have $u \in V(p), u \notin V(q), v \in V(q), v \notin V(p)$.
-    And since there are no accessibility relation between $u$ and $v$, then it's possible that $Rux \implies x \in V(p)$ and $Rvy \implies y \in V(q)$.\\
-    Therefore, we have $M, u \s (p \land \B p) \land \neg q$ and $M, v \s (q \land \B q) \land \neg p$.\\
-    Since $Rwu$ and $Rwv$, then we have $M, w \s \D ((p \land \B p) \land \neg q)$ and $M, w \s \D ((q \land \B q) \land \neg p)$.\\
-    Equivalently, we have $M, w \s \neg \B ((p \land \B p) \to q)$ and $M, w \s \neg \B ((q \land \B q) \to p)$.\\
-    Or, $M, w \s \neg \B ((p \land \B p) \to q) \land \neg \B ((q \land \B q) \to p)$.\\
-    Or in other words, $M, w \s \neg(\B ((p \land \B p) \to q) \lor \B ((q \land \B q) \to p))$.\\
-    At last, we arrive at $M, w \ns \B ((p \land \B p) \to q) \lor \B ((q \land \B q) \to p)$.\\
+    And since there are no accessibility relation between $u$ and $v$, then it's possible that $Rux \implies x \in V(p)$ and $Rvy \implies y \in V(q)$ for all $x, y \in W$.\\
+    \\
+    Following the definition of $M$, from (1), we have 
+    $$M, u \s (p \land \B p) \land \neg q.$$
+    And from (2), we have
+    $$M, v \s (q \land \B q) \land \neg p.$$
+    Since $Rwu$ and $Rwv$, then we have both
+    $$M, w \s \D ((p \land \B p) \land \neg q),$$
+    $$M, w \s \D ((q \land \B q) \land \neg p).$$
+    Equivalently, we have both
+    $$M, w \s \neg \B ((p \land \B p) \to q),$$
+    $$M, w \s \neg \B ((q \land \B q) \to p).$$
+    This means that, 
+    $$M, w \s \neg \B ((p \land \B p) \to q) \land \neg \B ((q \land \B q) \to p).$$
+    Or in other words, 
+    $$M, w \s \neg(\B ((p \land \B p) \to q) \lor \B ((q \land \B q) \to p)).$$
+    At last, we arrive at 
+    $$M, w \ns \B ((p \land \B p) \to q) \lor \B ((q \land \B q) \to p).$$
     Therefore, $F \ns \B ((p \land \B p) \to q) \lor \B ((q \land \B q) \to p)$.
 
 \end{proof}
@@ -126,7 +146,9 @@ Claim 5: if $F \vDash \D \B p \to \B \D p$ where $F = \langle W, R \rangle$, the
     Suppose $R$ is not weakly directed.
     Then $\exists w \exists u \exists v ((Rwu \land Rwv) \land \forall t(\neg Rut \lor \neg Rvt))$.
     Define a model $M  = \langle F, V \rangle$ s.t. for any $x \in W$, if $Rux$, then $x \in V(p)$; for any $y \in W$, if $Rvy$, then $y \notin V(p)$; ($V$ is arbitary otherwise).\\
-    Note that such model of $M$ is possible because we won't be in a situation where $Rux$ and $Rvy$ and $x = y$ given the fact that $R$ is not weakly connected.\\
+    Note that such model of $M$ is possible because $R$ is not weakly directed so that for all $t \in W$, $\neg Rut$ or $\neg Rvt$. 
+    So we wouldn't be falling into a contradiction where $Rux$, $Rvy$ but $x = y$, which the design of $M$ would give us $x \in V(p)$ and $x \notin v(p)$.\\
+    \\
     In this model, we can see that $M, u \s \B p$, which means that $M, w \s \D \B p$ since $Rwu$.
     However, note that $M, v \s \B \neg p$ is also true in our model. 
     This means that $M, w \s \D \B \neg p$, which is also equivalent to $M, w \s \neg \B \D p$.\\
@@ -298,15 +320,31 @@ $$(p \to q) \to (\neg q \to \neg p).$$
     $$\dr (A \land \neg A) \to \bot.$$
     This gives us that
     $$\dr (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n) \to \bot,$$
-    from the tautological instance,
+    from the tautological instance
     $(X \to (A \land \neg A)) \to [((A \land \neg A) \to \bot) \to (X \to \bot)]$ where $X \equiv (\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n)$.\\
-    This in turn means that $$\Gamma \cup \{\neg A\} \dr \bot,$$
+    This in turn means that 
+    $$\Gamma \cup \{\neg A\} \dr \bot,$$
     since $\{\phi_1 \land \dots \land \phi_n \land \psi_1 \land \dots \land \psi_n\} \subseteq \Gamma \cup \{\neg A\}$.\\
     So, $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent.\\
     \\
-    Let's prove the backward implication.
-    We can use (5a) where it states that $\Gamma$ is not $\Sigma$-consistent iff for all $A$, we have $\Gamma \dr A$.\\
-    Since $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent, then we have $\Gamma \dr A$.
+    \\
+    \\
+    Let's prove the backward implication.\\
+    Suppose $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent.
+    Then $\Gamma \cup \{\neg A\} \dr \bot$.\\
+    By deduction theorem, we have $\Gamma \dr \neg A \to \bot$.\\
+    Therefore, there exists finite $\{\phi_1 \land \dots \land \phi_n\} \subseteq \Gamma$ s.t.
+    $$\dr (\phi_1 \land \dots \land \phi_n) \to (\neg A \to \bot).$$
+    Note that $(\neg A \to \bot) \to A$ is a tautological instance.\\
+    Therefore,
+    $$\dr (\neg A \to \bot) \to A.$$
+    Hence, we can have
+    $$\dr (\phi_1 \land \dots \land \phi_n) \to A,$$
+    from the tautological instance $[X \to (\neg A \to \bot)] \to [((\neg A \to \bot) \to A) \to (X \to A)]$ where $X \equiv (\phi_1 \land \dots \land \phi_n)$.\\
+    This means that $\Gamma \dr A$.
+    
+    %We can use (5a) where it states that $\Gamma$ is not $\Sigma$-consistent iff for all $A$, we have $\Gamma \dr A$.\\
+    %Since $\Gamma \cup \{\neg A\}$ is not $\Sigma$-consistent, then we have $\Gamma \dr A$.
 
 \end{proof}
 
@@ -352,10 +390,10 @@ $$(p \to q) \to (\neg q \to \neg p).$$
     \\
     Let's do the backward implication.\\
     Proof by contradiction. Suppose $A \in \Gamma$ and $B \in \Gamma$ but $A \land B \notin \Gamma$.\\
-    Since $\Gamma$ is maximal, then $\neg(A \land B) \in \Gamma$.
+    Since $\Gamma$ is maximal, then $\neg(A \land B) \in \Gamma$.\\
     Therefore, by reflexivity, we have all three $\Gamma \dr A$, $\Gamma \dr B$, and $\Gamma \dr \neg (A \land B)$.\\
-    However, note that $A \to (B \to (\neg(A \land B) \to \bot))$ is a tautological instance.
-    Therefore, by proposition 3.36, part 5, $\Gamma \dr \bot$, which means that $\Gamma$ is not $\Sigma$-consistent.
+    However, note that $A \to (B \to (\neg(A \land B) \to \bot))$ is a tautological instance.\\
+    Therefore, by proposition 3.36, part 5, $\Gamma \dr \bot$, which means that $\Gamma$ is not $\Sigma$-consistent.\\
     This creates a contradictions.
     
 \end{proof}
